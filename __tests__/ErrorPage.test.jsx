@@ -1,8 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from '@testing-library/react';
-import ErrorPage from '../src/ErrorPage';
-import Router from "../src/Router";
-import { MemoryRouter } from "react-router-dom";
+import ErrorPage from '../src/routes/ErrorPage';
+import Router from "../src/routes/Router";
 
 describe('ErrorPage', () => {
     it('renders headline', () => {
