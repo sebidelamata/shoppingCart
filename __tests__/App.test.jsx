@@ -1,26 +1,26 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from '@testing-library/react';
 import App from '../src/routes/App';
-import CustomRouter from "../src/routes/Router";
+import { BrowserRouter } from "react-router-dom";
 
 
 describe('App', () => {
     it('renders headline', () => {
         render(
-            <CustomRouter>
+            <BrowserRouter>
                 <App />
-            </CustomRouter>
+            </BrowserRouter>
         );
         screen.debug();
     });
 
     it('renders correct heading', () => {
         render(
-            <CustomRouter>
+            <BrowserRouter>
                 <App/>
-            </CustomRouter>
+            </BrowserRouter>
         );
-        expect(screen.getByRole('heading').textContent).toMatch('Vite + React')
+        expect(screen.getByRole('heading').textContent).toMatch('GapingPond')
     })
     
 })

@@ -1,14 +1,14 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from '@testing-library/react';
 import Checkout from "../src/routes/Checkout";
-import CustomRouter from "../src/routes/Router";
+import { BrowserRouter } from "react-router-dom";
 
 describe('Checkout', () => {
     it('renders headline', () => {
         render(
-            <CustomRouter>
+            <BrowserRouter>
                 <Checkout />
-            </CustomRouter>
+            </BrowserRouter>
         ); 
 
         screen.debug();

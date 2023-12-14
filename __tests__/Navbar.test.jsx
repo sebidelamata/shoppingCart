@@ -1,15 +1,15 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from '@testing-library/react';
 import Navbar from '../src/components/Navbar.jsx';
-import CustomRouter from "../src/routes/Router.jsx";
+import { BrowserRouter } from "react-router-dom";
 
 
 describe('Navbar', () => {
     it('renders headline', () => {
         render(
-            <CustomRouter>
+            <BrowserRouter>
                 <Navbar />
-            </CustomRouter>
+            </BrowserRouter>
         );
 
     });
