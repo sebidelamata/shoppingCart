@@ -1,17 +1,17 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from '@testing-library/react';
-import Checkout from "../src/routes/Checkout";
-import CustomRouter from "../src/routes/Router";
+import Navbar from '../src/components/Navbar.jsx';
+import CustomRouter from "../src/routes/Router.jsx";
 
-describe('Checkout', () => {
+
+describe('Navbar', () => {
     it('renders headline', () => {
         render(
             <CustomRouter>
-                <Checkout />
+                <Navbar />
             </CustomRouter>
-        ); 
+        );
 
-        screen.debug();
     });
     
 })

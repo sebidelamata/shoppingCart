@@ -4,7 +4,7 @@ import ErrorPage from "./ErrorPage";
 import Shop from './Shop'
 import Checkout from './Checkout'
 
-const Router = () => {
+const CustomRouter = () => {
     const router = createBrowserRouter([
         {
           path: '/',
@@ -24,4 +24,4 @@ const Router = () => {
       return <RouterProvider router={router} />
 }
 
-export default Router
+export default CustomRouter
