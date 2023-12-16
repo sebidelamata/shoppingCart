@@ -10,9 +10,11 @@ import avalancheLogo from '../../public/avalanche-logo.png'
 import binanceLogo from '../../public/bnb-icon.png'
 import klaytnLogo from '../../public/klaytn-logo.png'
 import solanaLogo from '../../public/solana-logo.png'
+import arbitrumNovaLogo from '../../public/arbitrum-nova-icon.png'
 
 const CollectionCard = ({collection}) => {
     const [collectionURL, setCollectionURL] = useState(null)
+    const [collectionStats, setCollectionStats] = useState(null)
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(true)
     
@@ -24,9 +26,10 @@ const CollectionCard = ({collection}) => {
         'zora': zoraLogo,
         'arbitrum': arbitrumLogo,
         'avalanche': avalancheLogo,
-        'binance': binanceLogo,
+        'bsc': binanceLogo,
         'klaytn': klaytnLogo,
-        'solana': solanaLogo
+        'solana': solanaLogo,
+        'arbitrum_nova': arbitrumNovaLogo
     }
 
     const options = {
@@ -37,6 +40,7 @@ const CollectionCard = ({collection}) => {
         }
     }
     
+    // fetch name and picture
     useEffect(() => {
         fetch(`https://api.opensea.io/api/v2/collections/${collection.collection}`, options)
         .then((response) => {
@@ -50,7 +54,21 @@ const CollectionCard = ({collection}) => {
         .finally(() => setLoading(false))
     }, [])
 
-    console.log(collectionURL)
+    // fetch collection stats
+    useEffect(() => {
+        fetch(`https://api.opensea.io/api/v2/collections/${collection.collection}/stats`, options)
+        .then((response) => {
+            if(response.status >= 400){
+                throw new Error('server error');
+                }
+            return response.json()
+        })
+        .then((response) => setCollectionStats(response))
+        .catch((error) => setError(error))
+        .finally(() => setLoading(false))
+    }, [])
+
+    console.log(collectionStats)
 
     return(
         <div className='collection-card'>
@@ -72,8 +90,17 @@ const CollectionCard = ({collection}) => {
             }
             <div className='collection-card-name'><strong>{collection.name}</strong></div>
             <div className='collection-card-address'>{collection.contracts[0].address}</div>
-            <div className='colllection-card-chain'>
-                <img className='blockchain-icon' src={blockchainIcons[collection.contracts[0].chain]} alt={`${collection.contracts[0].chain}`} />
+            <div className='collection-card-bottom-row'>
+                <div className='colllection-card-chain'>
+                    <img className='blockchain-icon' src={blockchainIcons[collection.contracts[0].chain]} alt={`${collection.contracts[0].chain}`} />
+                </div>
+                {
+                    collectionStats && (
+                        <div className='collection-card-floor-price'>
+                            {`Floor Price: ${collectionStats.total.floor_price} ${collectionStats.total.floor_price_symbol === '' ? 'ETH' : collectionStats.total.floor_price_symbol}`}
+                        </div>
+                    )
+                }
             </div>
         </div>
     )

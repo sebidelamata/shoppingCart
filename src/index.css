@@ -135,9 +135,20 @@ button:focus-visible {
   width: 12em;
 }
 
+.collection-card-address{
+  font-size: x-small;
+  font-style: italic;
+}
+
 .blockchain-icon{
   display: grid;
   object-fit: contain;
   height: 1.25em;
   width: 1.25em;
+}
+
+.collection-card-bottom-row{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: end;
 }
