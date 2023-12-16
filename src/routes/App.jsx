@@ -17,7 +17,8 @@ function App() {
       </div>
       <h1>GapingPond</h1>
       <div className="card">
-        A Custom Whitelabel NFT Marketplace
+        <div>A Custom Whitelabel NFT Marketplace</div>
+        <div>bc sometimes its better to be a big fish in a small pond</div>
       </div>
     </>
   )

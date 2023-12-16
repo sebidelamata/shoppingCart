@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import Navbar from '../components/Navbar'
+import AllCollections from '../components/AllCollections'
 
 function Shop() {
-  const [count, setCount] = useState(0)
+  const [view, setView] = useState('allCollections')
 
   return (
     <>
@@ -10,8 +11,8 @@ function Shop() {
         <Navbar />
       </div>
       <h1>Shop NFTs</h1>
-      <div className="card">
-        shopping stuff goes here
+      <div className="all-collections-card">
+        <AllCollections />
       </div>
     </>
   )
