@@ -3,6 +3,7 @@ import App from "./App";
 import ErrorPage from "./ErrorPage";
 import Shop from './Shop'
 import Checkout from './Checkout'
+import AllCollections from '../components/AllCollections.jsx'
 
 const CustomRouter = () => {
     const router = createBrowserRouter([
@@ -13,7 +14,13 @@ const CustomRouter = () => {
         },
         {
           path: '/shop',
-          element: <Shop />
+          element: <Shop />,
+          children: [
+            {
+              index: true,
+              element: <AllCollections />
+            }
+          ]
         },
         {
           path: '/checkout',

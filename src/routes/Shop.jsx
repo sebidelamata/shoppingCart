@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Navbar from '../components/Navbar'
-import AllCollections from '../components/AllCollections'
+import { Outlet } from 'react-router-dom'
 
 function Shop() {
   const [view, setView] = useState('allCollections')
@@ -11,8 +11,8 @@ function Shop() {
         <Navbar />
       </div>
       <h1>Shop NFTs</h1>
-      <div className="all-collections-card">
-        <AllCollections />
+      <div className="outlet-card">
+        <Outlet />
       </div>
     </>
   )
