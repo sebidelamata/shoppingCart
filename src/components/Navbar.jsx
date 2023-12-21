@@ -23,6 +23,9 @@ const Navbar = () => {
             <li className='navbar-list-item'>
                 <Link to={'/checkout'} className='navbar-link'>Checkout</Link>
             </li>
+            <li className='navbar-list-item'>
+                <Link to={'/docs'} className='navbar-link'>Docs</Link>
+            </li>
         </ul>
     </div>
   )

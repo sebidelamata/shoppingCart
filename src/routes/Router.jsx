@@ -4,6 +4,7 @@ import ErrorPage from "./ErrorPage";
 import Shop from './Shop'
 import Checkout from './Checkout'
 import AllCollections from '../components/AllCollections.jsx'
+import Docs from './Docs.jsx'
 
 const CustomRouter = () => {
     const router = createBrowserRouter([
@@ -26,6 +27,10 @@ const CustomRouter = () => {
           path: '/checkout',
           element: <Checkout />
         },
+        {
+          path: '/docs',
+          element: <Docs />
+        }
       ]);
 
       return <RouterProvider router={router} />
