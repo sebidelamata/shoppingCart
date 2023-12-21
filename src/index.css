@@ -128,6 +128,12 @@ button:focus-visible {
   padding: 0.5em;
 }
 
+.collection-card-top-row{
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: min(1em);
+}
+
 .collection-image{
   display: grid;
   object-fit: cover;
@@ -136,12 +142,47 @@ button:focus-visible {
   border-radius: 1.5em;
 }
 
+.floor-price{
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
 .collection-card-address{
   font-size: x-small;
   font-style: italic;
 }
 
-.blockchain-icon{
+.collection-card-floor-price{
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.stats-row{
+  display: grid;
+  font-size: small;
+}
+
+.one-day-pct-change,
+.seven-day-pct-change{
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.one-day-pct-change-value-and-symbol,
+.seven-day-pct-change-value-and-symbol{
+  display: grid;
+  grid-template-columns: auto auto; 
+  gap: 0.1em;
+}
+
+.one-day-pct-change-value,
+.seven-day-pct-change-value{
+  text-align: right;
+}
+
+.unit-icon{
   display: grid;
   object-fit: contain;
   height: 1.25em;
@@ -152,6 +193,25 @@ button:focus-visible {
   display: grid;
   grid-template-columns: 1fr 1fr;
   justify-content: end;
+}
+
+.supply-and-for-sale-row{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.supply-label,
+.num-for-sale-label{
+  text-align: right;
+}
+
+.supply,
+.num-for-sale{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-content: center;
+  gap: min(0.2em);
 }
 
 .shop-header-and-search{
@@ -186,4 +246,29 @@ button:focus-visible {
   text-align: center;
   align-items: center;
   font-size: medium;
+}
+
+.pagination-row{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  padding: 0;
+  margin: 0;
+  justify-content: center;
+  align-items: center;
+  font-size: large;
+  gap: min(0.3em);
+}
+
+.pagination-row-left-arrow{
+  text-align: right;
+}
+
+.pagination-numbers-list{
+  display: grid;
+  padding: 0;
+  grid-template-columns: repeat(5, 1fr);
+  list-style-type: none;
+  gap: min(0.3em);
+  justify-content: center;
+  align-items: center;
 }
