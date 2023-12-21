@@ -5,6 +5,7 @@ import Shop from './Shop'
 import Checkout from './Checkout'
 import AllCollections from '../components/AllCollections.jsx'
 import Docs from './Docs.jsx'
+import SingleCollection from '../components/SingleCollection.jsx'
 
 const CustomRouter = () => {
     const router = createBrowserRouter([
@@ -20,6 +21,10 @@ const CustomRouter = () => {
             {
               index: true,
               element: <AllCollections />
+            },
+            {
+              path: '/shop/collections/:collectionName',
+              element: <SingleCollection />
             }
           ]
         },
