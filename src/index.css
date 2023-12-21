@@ -271,4 +271,5 @@ button:focus-visible {
   gap: min(0.3em);
   justify-content: center;
   align-items: center;
+  text-align: center;
 }

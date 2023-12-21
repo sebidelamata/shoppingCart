@@ -73,6 +73,11 @@ const AllCollections = () => {
     const handlePaginationEndClick = () => {
         setCurrentPage(numPages - 1)
     }
+    const highlightCurrentPage = (page) => {
+        if(page == currentpage + 1){
+            return 'bold'
+        }
+    }
 
     let paginationArray = Array.from({ length: 5}, (_, index) => {
         let out = currentpage + index + 1
@@ -117,7 +122,7 @@ const AllCollections = () => {
                     {
                         paginationArray.map((page) => {
                             return (
-                                <li key={page} className='pagination-list-page' onClick={(e) => handlePaginationPageClick(e)}>
+                                <li key={page} className='pagination-list-page' onClick={(e) => handlePaginationPageClick(e)} style={{fontWeight: highlightCurrentPage(page)}}>
                                     {page}
                                 </li>
                             )
