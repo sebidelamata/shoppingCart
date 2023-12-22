@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const SearchCollections = ({allCollectionsURL}) => {
 
     const [searchTerm, setSearchTerm] = useState('')
     const [filteredNames, setFilteredNames] = useState([])
+    const navigate = useNavigate()
     
     let names = allCollectionsURL.map((value) => {
         return value.name
@@ -20,6 +22,11 @@ const SearchCollections = ({allCollectionsURL}) => {
     
     const handleSelect = (selectedName) => {
         setSearchTerm(selectedName)
+        let selectedCollection = allCollectionsURL.find((item) => item.name === selectedName)
+        navigate(
+            `/shop/collections/${selectedCollection.collectionId}`,
+            { state: selectedCollection }
+        )
         setFilteredNames([])
     }
     
