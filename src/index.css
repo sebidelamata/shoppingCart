@@ -277,6 +277,6 @@ button:focus-visible {
 .collection-banner{
   display: grid;
   width: 100vw;
-  height: max(20svh);
+  height: max(25svh);
   object-fit: cover;
 }
