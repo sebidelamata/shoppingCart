@@ -11,10 +11,14 @@ const SingleCollection = () => {
     const SingleCollectionURL = (collection) => {
         const [nftLlamaCollectionData, setNftLlamaCollectionData] = useState(null)
         const [nftLlamaCollectionVolumeData, setNftLlamaCollectionVolumeData] = useState(null)
+        const [nftLlammaCollectionFloorPriceData, setNftLlammaCollectionFloorPriceData] = useState(null)
         const [openSeaCollectionData, setOpenSeaCollectionData] = useState(null)
+        const [openSeaCollectionNFTs, setOpenSeaCollectionNFTs] = useState(null)
         const [error, setError] = useState(null)
         const [loading, setLoading] = useState(true)
         const [currentpage, setCurrentPage] = useState(0)
+        const [showVolumeData, setShowVolumeData] = useState(false)
+        const [showFloorPriceData, setShowFloorPriceData] = useState(false)
 
         const fetchLlammaNFTCollectionData = async (collectionId) => {
 
@@ -64,6 +68,30 @@ const SingleCollection = () => {
             }
         }
 
+        const fetchLlammaNFTCollectionFloorPriceData = async (collectionId) => {
+
+            const url = `https://nft.llama.fi/floorHistory/${collectionId}`;
+            try{
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                      'Accept': '*/*',
+                        },
+                  });
+                  
+                  if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                  }
+                  
+                const data = await response.json();
+                setNftLlammaCollectionFloorPriceData(data);
+            } catch(error){
+                setError(error.message)
+            } finally {
+                setLoading(false)
+            }
+        }
+
         const fetchOpenSeaCollectionData = async (collection) => {
 
             let slug = await fetchCollectionSlug(collection.collectionId)
@@ -93,46 +121,127 @@ const SingleCollection = () => {
             }
         }
 
+        const fetchOpenSeaCollectionNFTs = async (collection) => {
+
+            let slug = await fetchCollectionSlug(collection.collectionId)
+
+            const options = {
+                method: 'GET',
+                headers: {
+                    accept: 'application/json',
+                    'x-api-key': import.meta.env.VITE_OPENSEA_API_KEY
+                }
+            }
+
+            const url = `https://api.opensea.io/api/v2/collection/${slug}/nfts`;
+            try{
+                const response = await fetch(url, options);
+                  
+                  if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                  }
+                  
+                const data = await response.json();
+                setOpenSeaCollectionNFTs(data);
+            } catch(error){
+                setError(error.message)
+            } finally {
+                setLoading(false)
+            }
+        }
+
         useEffect(() => {
-            fetchLlammaNFTCollectionData(collection.collectionId)
-            fetchLlammaNFTCollectionVolumeData(collection.collectionId)
-            fetchOpenSeaCollectionData(collection)
+            const handleFetches = async () => {
+                try{
+                    await fetchLlammaNFTCollectionData(collection.collectionId)
+                    await fetchOpenSeaCollectionData(collection)
+                    await fetchOpenSeaCollectionNFTs(collection)
+                } catch(error){
+                    setError(error.message)
+                }  finally{
+                    setLoading(false)
+                }
+            }
+
+            handleFetches()
         }, [])
+        useEffect(() => {
+            if(showVolumeData){
+                fetchLlammaNFTCollectionVolumeData(collection.collectionId)
+            }
+        }, [showVolumeData])
+        useEffect(() => {
+            if(showFloorPriceData){
+                fetchLlammaNFTCollectionFloorPriceData(collection.collectionId)
+            }
+        }, [showFloorPriceData])
         return { 
             nftLlamaCollectionData, 
             nftLlamaCollectionVolumeData,
-            openSeaCollectionData, 
+            nftLlammaCollectionFloorPriceData,
+            openSeaCollectionData,
+            openSeaCollectionNFTs, 
             error, 
             loading, 
             currentpage, 
-            setCurrentPage
+            setCurrentPage,
+            showVolumeData, 
+            setShowVolumeData,
+            showFloorPriceData, 
+            setShowFloorPriceData
         }
     }
 
     const {
         nftLlamaCollectionData, 
         nftLlamaCollectionVolumeData,
-        openSeaCollectionData, 
+        nftLlammaCollectionFloorPriceData,
+        openSeaCollectionData,
+        openSeaCollectionNFTs, 
         error, 
         loading, 
         currentpage, 
-        setCurrentPage
+        setCurrentPage,
+        showVolumeData, 
+        setShowVolumeData,
+        showFloorPriceData, 
+        setShowFloorPriceData
     } = SingleCollectionURL(collection)
 
     // wait for error/load screens
     if(error) return <p>A network error was encountered</p>
     if(loading) return <p>Loading...</p>
 
-    console.log(nftLlamaCollectionData)
-    console.log(nftLlamaCollectionVolumeData)
+    
     console.log(openSeaCollectionData)
+    console.log(openSeaCollectionNFTs)
 
     let startCollectionIndex = (25 * currentpage)
     let endCollectionIndex = (25 * currentpage) + 24
 
+    const handleVolumeClick = () => {
+        setShowVolumeData(!showVolumeData)
+    }
+
+    const handleFloorPriceClick = () => {
+        setShowFloorPriceData(!showFloorPriceData)
+    }
+
     return(
         <div>
-            {collection.name}
+            <div className='collection-banner-container'>
+                {
+                    openSeaCollectionData &&
+                    (
+                        <img className='collection-banner' src={openSeaCollectionData.banner_image_url} alt={`${collection.name} banner image`} />
+                    )
+                }
+            </div>
+            <div>{collection.name}</div>
+            <ul className='collection-stats-list'>
+                <li className='collection-stats-volume' onClick={() => handleVolumeClick()}>Volume</li>
+                <li className='collection-stats-floor-price' onClick={() => handleFloorPriceClick()}>Floor Price</li>
+            </ul>
         </div>
     )
 

@@ -273,3 +273,10 @@ button:focus-visible {
   align-items: center;
   text-align: center;
 }
+
+.collection-banner{
+  display: grid;
+  width: 100vw;
+  height: max(20svh);
+  object-fit: cover;
+}
