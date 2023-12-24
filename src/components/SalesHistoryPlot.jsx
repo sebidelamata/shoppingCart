@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react'
 import Plot from 'react-plotly.js'
 
-const VolumePlot = ({volumeData}) => {
+const SalesHistoryPlot = ({salesHistoryData}) => {
 
-    if (!volumeData || volumeData.length < 2) {
+    if (!salesHistoryData || salesHistoryData.length < 2) {
         return <p>No data available.</p>;
       }
 
-    const xData = volumeData.map((item) => item.day);
-    const yData = volumeData.map((item) => item.sum);
+    let xData = salesHistoryData.map((item) => item[0]);
+    xData = xData.map((timestamp) => new Date(timestamp * 1000))
+    const yData = salesHistoryData.map((item) => item[1]);
 
     const mean = yData.reduce((acc, val) => acc + val, 0) / yData.length;
     const stdDev = Math.sqrt(yData.reduce((acc, val) => acc + Math.pow(val - mean, 2), 0) / yData.length);
@@ -38,37 +39,35 @@ const VolumePlot = ({volumeData}) => {
     const plotData = [
         {
           type: 'scatter',
-          mode: 'lines+markers',
+          mode: 'markers',
           x: xData,
           y: yData,
-          line: {
-            shape: 'spline',
-            color: 'rgba(255, 255, 255, 0.5);',
-            width: '5'
+          marker: {
+            color: 'rgba(255, 255, 255, 0.25);',
           },
     }];
 
     const annotation = {
-      x: 0.85,
-      y: 0.8,
-      xref: 'paper',
-      yref: 'paper',
-      text: `Avg Daily Volume ${mean.toFixed(4)} ETH<br>Standard Deviation ${stdDev.toFixed(4)} ETH<br>7-Day Avg ${oneWeekMovingAverage.toFixed(4)} ETH<br>Last Daily Volume ${yData[yData.length - 1].toFixed(4)} ETH`,
-      showarrow: true,
-      arrowhead: 4,
-      ax: 0,
-      ay: -40,
-    };
+        x: 0.85,
+        y: 0.8,
+        xref: 'paper',
+        yref: 'paper',
+        text: `Avg Price ${mean.toFixed(4)} ETH<br>Standard Deviation ${stdDev.toFixed(4)} ETH<br>7-Day Avg ${oneWeekMovingAverage.toFixed(4)} ETH<br>Last Sale Price ${yData[yData.length - 1].toFixed(4)} ETH`,
+        showarrow: true,
+        arrowhead: 4,
+        ax: 0,
+        ay: -40,
+      };
     
     const layout = {
-        title: 'Daily Volume',
+        title: 'Sales History',
         xaxis: { title: 'Day' },
-        yaxis: { title: 'Daily Volume (ETH)' },
+        yaxis: { title: 'Sale Price (ETH)' },
         plot_bgcolor: '#242424',
         paper_bgcolor: '#242424',
         font: { color: 'white' }, 
         autosize: true, 
-        annotations: [annotation,],
+        annotations: [annotation],
       };
 
     return(
@@ -76,4 +75,4 @@ const VolumePlot = ({volumeData}) => {
     )
 }
 
-export default VolumePlot
+export default SalesHistoryPlot

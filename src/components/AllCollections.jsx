@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import CollectionCard from './CollectionCard'
 import SearchCollections from './SearchCollections'
 import PaginationRow from './PaginationRow'
+import Loading from './Loading'
 
 const AllCollections = () => {
 
@@ -45,7 +46,7 @@ const AllCollections = () => {
 
     // wait for error/load screens
     if(error) return <p>A network error was encountered</p>
-    if(loading) return <p>Loading...</p>
+    if(loading) return <Loading/>
 
     let startCollectionIndex = (25 * currentpage)
     let endCollectionIndex = (25 * currentpage) + 24

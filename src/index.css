@@ -101,7 +101,11 @@ button:focus-visible {
   margin: 0;
   align-items: center;
   justify-content: center;
+}
 
+.fa-shopping-cart{
+  display: grid;
+  width: 100%;
 }
 
 .navbar-link{
@@ -328,9 +332,43 @@ button:focus-visible {
   object-fit: cover;
 }
 
+.collection-stats-list{
+  display: grid;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  justify-content: center;
+  align-items: center;
+  gap: min(1em);
+}
+
+.collection-stat{
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+.collection-stats-title{
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1em;
+  border-color: white;
+  border-width: 0.1em;
+  border-style: solid;
+  padding: min(0.5em);
+  padding-left: 0;
+  padding-right: 0;
+  width: 90vw;
+}
+
 .volume-plot{
   display: grid;
-  width: 100 vw;
+  width: max(100vw);
   height: max(50svh);
   object-fit: contain;
+}
+
+.plot{
+  max-width: 100vw;
 }

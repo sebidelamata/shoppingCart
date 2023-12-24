@@ -5,6 +5,8 @@ import fetchCollectionSlug from '../scripts/fetchCollectionSlug.js'
 import Loading from './Loading.jsx'
 import VolumePlot from './VolumePlot.jsx'
 import FloorPricePlot from './FloorPricePlot.jsx'
+import SalesHistoryPlot from './SalesHistoryPlot.jsx'
+import OrderBookPlot from './OrderBookPlot.jsx'
 
 const SingleCollection = () => {
 
@@ -31,6 +33,12 @@ const SingleCollection = () => {
 
         const [floorPriceError, setfloorPriceError] = useState(null)
         const [floorPriceLoading, setfloorPriceLoading] = useState(true)
+
+        const [salesError, setSalesError] = useState(null)
+        const [salesLoading, setSalesLoading] = useState(true)
+
+        const [orderBookError, setOrderBookError] = useState(null)
+        const [orderBookLoading, setOrderBookLoading] = useState(true)
 
         //handle pagination
         const [currentpage, setCurrentPage] = useState(0)
@@ -131,9 +139,9 @@ const SingleCollection = () => {
                 const data = await response.json();
                 setLlammaNFTSalesHistoryData(data);
             } catch(error){
-                setError(error.message)
+                setSalesError(error.message)
             } finally {
-                setLoading(false)
+                setSalesLoading(false)
             }
         }
 
@@ -155,9 +163,9 @@ const SingleCollection = () => {
                 const data = await response.json();
                 setllammaOrderBookData(data);
             } catch(error){
-                setError(error.message)
+                setOrderBookError(error.message)
             } finally {
-                setLoading(false)
+                setOrderBookLoading(false)
             }
         }
 
@@ -298,6 +306,10 @@ const SingleCollection = () => {
             volumeLoading, 
             floorPriceError,
             floorPriceLoading,
+            salesError,
+            salesLoading,
+            orderBookError,
+            orderBookLoading,
             currentpage, 
             setCurrentPage,
             showVolumeData, 
@@ -325,6 +337,10 @@ const SingleCollection = () => {
         volumeLoading,
         floorPriceError,
         floorPriceLoading,
+        salesError,
+        salesLoading,
+        orderBookError,
+        orderBookLoading,
         currentpage, 
         setCurrentPage,
         showVolumeData, 
@@ -342,7 +358,7 @@ const SingleCollection = () => {
     if(loading) return <Loading/>
 
     
-    console.log(nftLlammaCollectionFloorPriceData)
+    console.log(llammaOrderBookData)
     // console.log(openSeaCollectionNFTs)
 
     let startCollectionIndex = (25 * currentpage)
@@ -376,16 +392,16 @@ const SingleCollection = () => {
             </div>
             <div>{collection.name}</div>
             <ul className='collection-stats-list'>
-                <li className='collection-stats-volume' onClick={() => handleVolumeClick()}>
+                <li className='collection-stats-volume collection-stat'>
                     {
                         showVolumeData === false &&
-                        <div className='collection-stats-title'>Volume</div>
+                        <div className='collection-stats-title' onClick={() => handleVolumeClick()}>Volume</div>
                     }
                     {
                         showVolumeData === true &&
                         volumeError &&
                         <>
-                            <div className='collection-stats-title'>Volume</div>
+                            <div className='collection-stats-title' onClick={() => handleVolumeClick()}>Volume</div>
                             <div>A network error was encountered</div>
                         </>
                     }
@@ -393,7 +409,7 @@ const SingleCollection = () => {
                         showVolumeData === true &&
                         volumeLoading &&
                         <>
-                            <div className='collection-stats-title'>Volume</div>
+                            <div className='collection-stats-title' onClick={() => handleVolumeClick()}>Volume</div>
                             <Loading/>
                         </>
                     }
@@ -402,21 +418,21 @@ const SingleCollection = () => {
                         nftLlamaCollectionVolumeData &&
                         volumeLoading === false &&
                         <>
-                            <div className='collection-stats-title'>Volume</div>
+                            <div className='collection-stats-title' onClick={() => handleVolumeClick()}>Volume</div>
                             <VolumePlot className='volume-plot' volumeData={nftLlamaCollectionVolumeData}/>
                         </>
                     }
                 </li>
-                <li className='collection-stats-floor-price' onClick={() => handleFloorPriceClick()}>
+                <li className='collection-stats-floor-price collection-stat'>
                     {
                         showFloorPriceData === false &&
-                        <div className='collection-stats-title'>Floor Price</div>
+                        <div className='collection-stats-title' onClick={() => handleFloorPriceClick()}>Floor Price</div>
                     }
                     {
                         showFloorPriceData === true &&
                         floorPriceError &&
                         <>
-                            <div className='collection-stats-title'>Floor Price</div>
+                            <div className='collection-stats-title' onClick={() => handleFloorPriceClick()}>Floor Price</div>
                             <div>A network error was encountered</div>
                         </>
                     }
@@ -424,7 +440,7 @@ const SingleCollection = () => {
                         showFloorPriceData === true &&
                         floorPriceLoading === true &&
                         <>
-                            <div className='collection-stats-title'>Floor Price</div>
+                            <div className='collection-stats-title' onClick={() => handleFloorPriceClick()}>Floor Price</div>
                             <Loading/>
                         </>
                     }
@@ -432,36 +448,68 @@ const SingleCollection = () => {
                         showFloorPriceData === true &&
                         nftLlammaCollectionFloorPriceData &&
                         <>
-                            <div className='collection-stats-title'>Floor Price</div>
+                            <div className='collection-stats-title' onClick={() => handleFloorPriceClick()}>Floor Price</div>
                             <FloorPricePlot className='volume-plot' floorPriceData={nftLlammaCollectionFloorPriceData}/>
                         </>
                     }
                 </li>
-                <li className='collection-stats-sales-history' onClick={() => handleSalesHistoryClick()}>
+                <li className='collection-stats-sales-history collection-stat'>
                     {
                         showSaleHistoryData === false &&
-                        <div className='collection-stats-title'>Sales Historic</div>
+                        <div className='collection-stats-title' onClick={() => handleSalesHistoryClick()}>Sales Historic</div>
+                    }
+                    {
+                        showSaleHistoryData === true &&
+                        salesError &&
+                        <>
+                            <div className='collection-stats-title' onClick={() => handleSalesHistoryClick()}>Sales Historic</div>
+                            <div>A network error was encountered</div>
+                        </>
+                    }
+                    {
+                        showSaleHistoryData === true &&
+                        salesLoading === true &&
+                        <>
+                            <div className='collection-stats-title' onClick={() => handleSalesHistoryClick()}>Sales Historic</div>
+                            <Loading/>
+                        </>
                     }
                     {
                         showSaleHistoryData === true &&
                         llammaNFTSalesHistoryData &&
                         <>
-                            <div className='collection-stats-title'>Sales Historic</div>
-                            <div>{llammaNFTSalesHistoryData[0][1]}</div>
+                            <div className='collection-stats-title' onClick={() => handleSalesHistoryClick()}>Sales Historic</div>
+                            <SalesHistoryPlot salesHistoryData={llammaNFTSalesHistoryData}/>
                         </>
                     }
                 </li>
-                <li className='collection-stats-order-book' onClick={() => handleOrderBookClick()}>
+                <li className='collection-stats-order-book collection-stat'>
                     {
                         showOrderBookData === false &&
-                        <div className='collection-stats-title'>Order Book</div>
+                        <div className='collection-stats-title' onClick={() => handleOrderBookClick()}>Order Book</div>
+                    }
+                    {
+                        showOrderBookData === true &&
+                        orderBookError &&
+                        <>
+                            <div className='collection-stats-title' onClick={() => handleOrderBookClick()}>Order Book</div>
+                            <div>A network error was encountered</div>
+                        </>
+                    }
+                    {
+                        showOrderBookData === true &&
+                        orderBookLoading === true &&
+                        <>
+                            <div className='collection-stats-title' onClick={() => handleOrderBookClick()}>Order Book</div>
+                            <Loading/>
+                        </>
                     }
                     {
                         showOrderBookData === true &&
                         llammaOrderBookData &&
                         <>
-                            <div className='collection-stats-title'>Order Book</div>
-                            <div>{llammaOrderBookData[0].amount}</div>
+                            <div className='collection-stats-title' onClick={() => handleOrderBookClick()}>Order Book</div>
+                            <OrderBookPlot orderBookData={llammaOrderBookData}/>
                         </>
                     }
                 </li>

@@ -1,16 +1,16 @@
-import { useState } from 'react'
 import Navbar from '../components/Navbar'
-import { Outlet } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 
 function Shop() {
-  const [view, setView] = useState('allCollections')
 
   return (
     <>
       <div>
         <Navbar />
       </div>
-      <h1>Shop NFTs</h1>
+      <Link to={'/shop'}>
+        <h1>Shop NFTs</h1>
+      </Link>
       <div className="outlet-card">
         <Outlet />
       </div>
