@@ -7,6 +7,7 @@ import VolumePlot from './VolumePlot.jsx'
 import FloorPricePlot from './FloorPricePlot.jsx'
 import SalesHistoryPlot from './SalesHistoryPlot.jsx'
 import OrderBookPlot from './OrderBookPlot.jsx'
+import blankNFT from '../../public/blank_nft.svg'
 
 const SingleCollection = () => {
 
@@ -385,8 +386,16 @@ const SingleCollection = () => {
             <div className='collection-banner-container'>
                 {
                     openSeaCollectionData &&
+                    openSeaCollectionData.banner_image_url !== "" &&
                     (
                         <img className='collection-banner' src={openSeaCollectionData.banner_image_url} alt={`${collection.name} banner image`} />
+                    )
+                }
+                {
+                    openSeaCollectionData &&
+                    openSeaCollectionData.banner_image_url === "" &&
+                    (
+                        <img className='collection-banner' src={blankNFT} alt={`blank banner image`} />
                     )
                 }
             </div>
