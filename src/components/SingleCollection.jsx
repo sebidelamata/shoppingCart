@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react'
 import PaginationRow from './PaginationRow'
 import { useLocation } from 'react-router-dom'
 import fetchCollectionSlug from '../scripts/fetchCollectionSlug.js'
+import Loading from './Loading.jsx'
+import VolumePlot from './VolumePlot.jsx'
+import FloorPricePlot from './FloorPricePlot.jsx'
 
 const SingleCollection = () => {
 
@@ -22,6 +25,12 @@ const SingleCollection = () => {
         //loading and error states for each fetch (TODO)
         const [error, setError] = useState(null)
         const [loading, setLoading] = useState(true)
+
+        const [volumeError, setVolumeError] = useState(null)
+        const [volumeLoading, setVolumeLoading] = useState(true)
+
+        const [floorPriceError, setfloorPriceError] = useState(null)
+        const [floorPriceLoading, setfloorPriceLoading] = useState(true)
 
         //handle pagination
         const [currentpage, setCurrentPage] = useState(0)
@@ -74,9 +83,9 @@ const SingleCollection = () => {
                 const data = await response.json();
                 setNftLlamaCollectionVolumeData(data);
             } catch(error){
-                setError(error.message)
+                setVolumeError(error.message)
             } finally {
-                setLoading(false)
+                setVolumeLoading(false)
             }
         }
 
@@ -98,9 +107,9 @@ const SingleCollection = () => {
                 const data = await response.json();
                 setNftLlammaCollectionFloorPriceData(data);
             } catch(error){
-                setError(error.message)
+                setfloorPriceError(error.message)
             } finally {
-                setLoading(false)
+                setfloorPriceLoading(false)
             }
         }
 
@@ -201,16 +210,15 @@ const SingleCollection = () => {
                 const url = nextPage ? `https://api.opensea.io/api/v2/collection/${slug}/nfts?limit=200&next=${nextPage}` : `https://api.opensea.io/api/v2/collection/${slug}/nfts?limit=200`
                 try{
                     const response = await fetch(url, options);
-                    await new Promise(r => setTimeout(r, 500));
+                    // await new Promise(r => setTimeout(r, 10));
                     
                     if (!response.ok) {
                         throw new Error(`HTTP error! Status: ${response.status}`);
                     }
                     
                     const data = await response.json();
-                    allNFTs = allNFTs.concat(data.nfts);
-                    console.log(allNFTs)
-                    nextPage = data.next;
+                    allNFTs = allNFTs.concat(await data.nfts);
+                    nextPage = await data.next;
                 } catch(error){
                     setError(error.message)
                 } finally {
@@ -226,6 +234,21 @@ const SingleCollection = () => {
                 try{
                     await fetchLlammaNFTCollectionData(collection.collectionId)
                     await fetchOpenSeaCollectionData(collection)
+                    await fetchOpenSeaCollectionNFTs(collection)
+                } catch(error){
+                    setError(error.message)
+                }  finally{
+                    setLoading(false)
+                }
+            }
+
+            handleFetches()
+        }, [])
+
+        //separate useEffect for the looped fetch
+        useEffect(() => {
+            const handleFetches = async () => {
+                try{
                     await fetchOpenSeaCollectionNFTs(collection)
                 } catch(error){
                     setError(error.message)
@@ -270,7 +293,11 @@ const SingleCollection = () => {
             openSeaCollectionData,
             openSeaCollectionNFTs, 
             error, 
-            loading, 
+            loading,
+            volumeError,
+            volumeLoading, 
+            floorPriceError,
+            floorPriceLoading,
             currentpage, 
             setCurrentPage,
             showVolumeData, 
@@ -293,7 +320,11 @@ const SingleCollection = () => {
         openSeaCollectionData,
         openSeaCollectionNFTs, 
         error, 
-        loading, 
+        loading,
+        volumeError,
+        volumeLoading,
+        floorPriceError,
+        floorPriceLoading,
         currentpage, 
         setCurrentPage,
         showVolumeData, 
@@ -308,11 +339,11 @@ const SingleCollection = () => {
 
     // wait for error/load screens
     if(error) return <p>A network error was encountered</p>
-    if(loading) return <p>Loading...</p>
+    if(loading) return <Loading/>
 
     
-    console.log(openSeaCollectionData)
-    console.log(openSeaCollectionNFTs)
+    console.log(nftLlammaCollectionFloorPriceData)
+    // console.log(openSeaCollectionNFTs)
 
     let startCollectionIndex = (25 * currentpage)
     let endCollectionIndex = (25 * currentpage) + 24
@@ -352,10 +383,27 @@ const SingleCollection = () => {
                     }
                     {
                         showVolumeData === true &&
-                        nftLlamaCollectionVolumeData &&
+                        volumeError &&
                         <>
                             <div className='collection-stats-title'>Volume</div>
-                            <div>{nftLlamaCollectionVolumeData[1].sum}</div>
+                            <div>A network error was encountered</div>
+                        </>
+                    }
+                    {
+                        showVolumeData === true &&
+                        volumeLoading &&
+                        <>
+                            <div className='collection-stats-title'>Volume</div>
+                            <Loading/>
+                        </>
+                    }
+                    {
+                        showVolumeData === true &&
+                        nftLlamaCollectionVolumeData &&
+                        volumeLoading === false &&
+                        <>
+                            <div className='collection-stats-title'>Volume</div>
+                            <VolumePlot className='volume-plot' volumeData={nftLlamaCollectionVolumeData}/>
                         </>
                     }
                 </li>
@@ -366,10 +414,26 @@ const SingleCollection = () => {
                     }
                     {
                         showFloorPriceData === true &&
+                        floorPriceError &&
+                        <>
+                            <div className='collection-stats-title'>Floor Price</div>
+                            <div>A network error was encountered</div>
+                        </>
+                    }
+                    {
+                        showFloorPriceData === true &&
+                        floorPriceLoading === true &&
+                        <>
+                            <div className='collection-stats-title'>Floor Price</div>
+                            <Loading/>
+                        </>
+                    }
+                    {
+                        showFloorPriceData === true &&
                         nftLlammaCollectionFloorPriceData &&
                         <>
                             <div className='collection-stats-title'>Floor Price</div>
-                            <div>{nftLlammaCollectionFloorPriceData[0].floorPrice}</div>
+                            <FloorPricePlot className='volume-plot' floorPriceData={nftLlammaCollectionFloorPriceData}/>
                         </>
                     }
                 </li>
@@ -405,7 +469,7 @@ const SingleCollection = () => {
             <ul className='nfts-list'>
                     {
                         !openSeaCollectionNFTs &&
-                        <div>Loading...</div>
+                        <Loading/>
                     }
                     {
                         openSeaCollectionNFTs &&

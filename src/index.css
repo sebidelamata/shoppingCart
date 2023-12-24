@@ -248,6 +248,53 @@ button:focus-visible {
   font-size: medium;
 }
 
+.loading-dock{
+  display: grid;
+  grid-template-rows: auto auto;
+  width: 100%;
+  gap: min(2em);
+  padding-top: min(2em);
+  padding-bottom: min(2em);
+}
+
+.loading-icon-container{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: x-large;
+}
+
+.loading-icon{
+  display: grid;
+  object-fit: fill;
+  width: max(100%);
+  height: max(100%);
+  animation: spin 2s linear infinite;
+}
+
+.loading-text{
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-weight: 900;
+}
+
+@keyframes spin {
+  0% { 
+    transform: rotate(0deg) scale(1); 
+  }
+  50%{
+    transform: rotate(180deg) scale(0.5); 
+  }
+  100% { 
+    transform: rotate(360deg) scale(1); 
+  }
+}
+
 .pagination-row{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -279,4 +326,11 @@ button:focus-visible {
   width: 100vw;
   height: max(25svh);
   object-fit: cover;
+}
+
+.volume-plot{
+  display: grid;
+  width: 100 vw;
+  height: max(50svh);
+  object-fit: contain;
 }
