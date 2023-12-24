@@ -359,7 +359,7 @@ const SingleCollection = () => {
     if(loading) return <Loading/>
 
     
-    console.log(llammaOrderBookData)
+    console.log(nftLlamaCollectionData)
     // console.log(openSeaCollectionNFTs)
 
     let startCollectionIndex = (25 * currentpage)
@@ -382,163 +382,176 @@ const SingleCollection = () => {
     }
 
     return(
-        <div>
-            <div className='collection-banner-container'>
+        <div className='single-collection'>
+            <div className='collection-header'>
+                <div className='collection-banner-container'>
+                    {
+                        openSeaCollectionData &&
+                        openSeaCollectionData.banner_image_url !== "" &&
+                        (
+                            <img className='collection-banner' src={openSeaCollectionData.banner_image_url} alt={`${collection.name} banner image`} />
+                        )
+                    }
+                    {
+                        openSeaCollectionData &&
+                        openSeaCollectionData.banner_image_url === "" &&
+                        (
+                            <img className='collection-banner' src={blankNFT} alt={`blank banner image`} />
+                        )
+                    }
+                </div>
                 {
-                    openSeaCollectionData &&
-                    openSeaCollectionData.banner_image_url !== "" &&
+                    nftLlamaCollectionData &&
+                    nftLlamaCollectionData[0].image &&
                     (
-                        <img className='collection-banner' src={openSeaCollectionData.banner_image_url} alt={`${collection.name} banner image`} />
+                        <div className='collection-image-container'>
+                            <img className='collection-page-collection-image' src={nftLlamaCollectionData[0].image} alt="collection image" />
+                        </div>
                     )
                 }
-                {
-                    openSeaCollectionData &&
-                    openSeaCollectionData.banner_image_url === "" &&
-                    (
-                        <img className='collection-banner' src={blankNFT} alt={`blank banner image`} />
-                    )
-                }
+                <div>{collection.name}</div>
             </div>
-            <div>{collection.name}</div>
-            <ul className='collection-stats-list'>
-                <li className='collection-stats-volume collection-stat'>
-                    {
-                        showVolumeData === false &&
-                        <div className='collection-stats-title' onClick={() => handleVolumeClick()}>Volume</div>
-                    }
-                    {
-                        showVolumeData === true &&
-                        volumeError &&
-                        <>
+            <div className='single-collection-body'>
+                <ul className='collection-stats-list'>
+                    <li className='collection-stats-volume collection-stat'>
+                        {
+                            showVolumeData === false &&
                             <div className='collection-stats-title' onClick={() => handleVolumeClick()}>Volume</div>
-                            <div>A network error was encountered</div>
-                        </>
-                    }
-                    {
-                        showVolumeData === true &&
-                        volumeLoading &&
-                        <>
-                            <div className='collection-stats-title' onClick={() => handleVolumeClick()}>Volume</div>
-                            <Loading/>
-                        </>
-                    }
-                    {
-                        showVolumeData === true &&
-                        nftLlamaCollectionVolumeData &&
-                        volumeLoading === false &&
-                        <>
-                            <div className='collection-stats-title' onClick={() => handleVolumeClick()}>Volume</div>
-                            <VolumePlot className='volume-plot' volumeData={nftLlamaCollectionVolumeData}/>
-                        </>
-                    }
-                </li>
-                <li className='collection-stats-floor-price collection-stat'>
-                    {
-                        showFloorPriceData === false &&
-                        <div className='collection-stats-title' onClick={() => handleFloorPriceClick()}>Floor Price</div>
-                    }
-                    {
-                        showFloorPriceData === true &&
-                        floorPriceError &&
-                        <>
+                        }
+                        {
+                            showVolumeData === true &&
+                            volumeError &&
+                            <>
+                                <div className='collection-stats-title' onClick={() => handleVolumeClick()}>Volume</div>
+                                <div>A network error was encountered</div>
+                            </>
+                        }
+                        {
+                            showVolumeData === true &&
+                            volumeLoading &&
+                            <>
+                                <div className='collection-stats-title' onClick={() => handleVolumeClick()}>Volume</div>
+                                <Loading/>
+                            </>
+                        }
+                        {
+                            showVolumeData === true &&
+                            nftLlamaCollectionVolumeData &&
+                            volumeLoading === false &&
+                            <>
+                                <div className='collection-stats-title' onClick={() => handleVolumeClick()}>Volume</div>
+                                <VolumePlot className='volume-plot' volumeData={nftLlamaCollectionVolumeData}/>
+                            </>
+                        }
+                    </li>
+                    <li className='collection-stats-floor-price collection-stat'>
+                        {
+                            showFloorPriceData === false &&
                             <div className='collection-stats-title' onClick={() => handleFloorPriceClick()}>Floor Price</div>
-                            <div>A network error was encountered</div>
-                        </>
-                    }
-                    {
-                        showFloorPriceData === true &&
-                        floorPriceLoading === true &&
-                        <>
-                            <div className='collection-stats-title' onClick={() => handleFloorPriceClick()}>Floor Price</div>
-                            <Loading/>
-                        </>
-                    }
-                    {
-                        showFloorPriceData === true &&
-                        nftLlammaCollectionFloorPriceData &&
-                        <>
-                            <div className='collection-stats-title' onClick={() => handleFloorPriceClick()}>Floor Price</div>
-                            <FloorPricePlot className='volume-plot' floorPriceData={nftLlammaCollectionFloorPriceData}/>
-                        </>
-                    }
-                </li>
-                <li className='collection-stats-sales-history collection-stat'>
-                    {
-                        showSaleHistoryData === false &&
-                        <div className='collection-stats-title' onClick={() => handleSalesHistoryClick()}>Sales Historic</div>
-                    }
-                    {
-                        showSaleHistoryData === true &&
-                        salesError &&
-                        <>
+                        }
+                        {
+                            showFloorPriceData === true &&
+                            floorPriceError &&
+                            <>
+                                <div className='collection-stats-title' onClick={() => handleFloorPriceClick()}>Floor Price</div>
+                                <div>A network error was encountered</div>
+                            </>
+                        }
+                        {
+                            showFloorPriceData === true &&
+                            floorPriceLoading === true &&
+                            <>
+                                <div className='collection-stats-title' onClick={() => handleFloorPriceClick()}>Floor Price</div>
+                                <Loading/>
+                            </>
+                        }
+                        {
+                            showFloorPriceData === true &&
+                            nftLlammaCollectionFloorPriceData &&
+                            <>
+                                <div className='collection-stats-title' onClick={() => handleFloorPriceClick()}>Floor Price</div>
+                                <FloorPricePlot className='volume-plot' floorPriceData={nftLlammaCollectionFloorPriceData}/>
+                            </>
+                        }
+                    </li>
+                    <li className='collection-stats-sales-history collection-stat'>
+                        {
+                            showSaleHistoryData === false &&
                             <div className='collection-stats-title' onClick={() => handleSalesHistoryClick()}>Sales Historic</div>
-                            <div>A network error was encountered</div>
-                        </>
-                    }
-                    {
-                        showSaleHistoryData === true &&
-                        salesLoading === true &&
-                        <>
-                            <div className='collection-stats-title' onClick={() => handleSalesHistoryClick()}>Sales Historic</div>
+                        }
+                        {
+                            showSaleHistoryData === true &&
+                            salesError &&
+                            <>
+                                <div className='collection-stats-title' onClick={() => handleSalesHistoryClick()}>Sales Historic</div>
+                                <div>A network error was encountered</div>
+                            </>
+                        }
+                        {
+                            showSaleHistoryData === true &&
+                            salesLoading === true &&
+                            <>
+                                <div className='collection-stats-title' onClick={() => handleSalesHistoryClick()}>Sales Historic</div>
+                                <Loading/>
+                            </>
+                        }
+                        {
+                            showSaleHistoryData === true &&
+                            llammaNFTSalesHistoryData &&
+                            <>
+                                <div className='collection-stats-title' onClick={() => handleSalesHistoryClick()}>Sales Historic</div>
+                                <SalesHistoryPlot salesHistoryData={llammaNFTSalesHistoryData}/>
+                            </>
+                        }
+                    </li>
+                    <li className='collection-stats-order-book collection-stat'>
+                        {
+                            showOrderBookData === false &&
+                            <div className='collection-stats-title' onClick={() => handleOrderBookClick()}>Order Book</div>
+                        }
+                        {
+                            showOrderBookData === true &&
+                            orderBookError &&
+                            <>
+                                <div className='collection-stats-title' onClick={() => handleOrderBookClick()}>Order Book</div>
+                                <div>A network error was encountered</div>
+                            </>
+                        }
+                        {
+                            showOrderBookData === true &&
+                            orderBookLoading === true &&
+                            <>
+                                <div className='collection-stats-title' onClick={() => handleOrderBookClick()}>Order Book</div>
+                                <Loading/>
+                            </>
+                        }
+                        {
+                            showOrderBookData === true &&
+                            llammaOrderBookData &&
+                            <>
+                                <div className='collection-stats-title' onClick={() => handleOrderBookClick()}>Order Book</div>
+                                <OrderBookPlot orderBookData={llammaOrderBookData}/>
+                            </>
+                        }
+                    </li>
+                </ul>
+                <ul className='nfts-list'>
+                        {
+                            !openSeaCollectionNFTs &&
                             <Loading/>
-                        </>
-                    }
-                    {
-                        showSaleHistoryData === true &&
-                        llammaNFTSalesHistoryData &&
-                        <>
-                            <div className='collection-stats-title' onClick={() => handleSalesHistoryClick()}>Sales Historic</div>
-                            <SalesHistoryPlot salesHistoryData={llammaNFTSalesHistoryData}/>
-                        </>
-                    }
-                </li>
-                <li className='collection-stats-order-book collection-stat'>
-                    {
-                        showOrderBookData === false &&
-                        <div className='collection-stats-title' onClick={() => handleOrderBookClick()}>Order Book</div>
-                    }
-                    {
-                        showOrderBookData === true &&
-                        orderBookError &&
-                        <>
-                            <div className='collection-stats-title' onClick={() => handleOrderBookClick()}>Order Book</div>
-                            <div>A network error was encountered</div>
-                        </>
-                    }
-                    {
-                        showOrderBookData === true &&
-                        orderBookLoading === true &&
-                        <>
-                            <div className='collection-stats-title' onClick={() => handleOrderBookClick()}>Order Book</div>
-                            <Loading/>
-                        </>
-                    }
-                    {
-                        showOrderBookData === true &&
-                        llammaOrderBookData &&
-                        <>
-                            <div className='collection-stats-title' onClick={() => handleOrderBookClick()}>Order Book</div>
-                            <OrderBookPlot orderBookData={llammaOrderBookData}/>
-                        </>
-                    }
-                </li>
-            </ul>
-            <ul className='nfts-list'>
-                    {
-                        !openSeaCollectionNFTs &&
-                        <Loading/>
-                    }
-                    {
-                        openSeaCollectionNFTs &&
-                        openSeaCollectionNFTs.slice(startCollectionIndex, endCollectionIndex).map((nft) => {
-                            return (
-                                <li key={nft.identifier}>
-                                    {nft.identifier}
-                                </li>
-                            )
-                        })
-                    }
-            </ul>
+                        }
+                        {
+                            openSeaCollectionNFTs &&
+                            openSeaCollectionNFTs.slice(startCollectionIndex, endCollectionIndex).map((nft) => {
+                                return (
+                                    <li key={nft.identifier}>
+                                        {nft.identifier}
+                                    </li>
+                                )
+                            })
+                        }
+                </ul>
+            </div>
         </div>
     )
 

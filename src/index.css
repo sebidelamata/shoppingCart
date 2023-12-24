@@ -33,8 +33,15 @@ body {
 }
 
 h1 {
+  position: relative;
   font-size: 3.2em;
   line-height: 1.1;
+  padding: 0;
+  padding-top: 2svh;
+  margin: 0;
+  -webkit-text-stroke: 0.025em black;
+  text-stroke: 0.025em black;
+  z-index: 2;
 }
 
 button {
@@ -83,6 +90,7 @@ button:focus-visible {
   align-items: end;
   justify-content: space-between;
   width: 100vw;
+  height: max(3svh);
 }
 
 .navbar-name-and-logo{
@@ -110,6 +118,20 @@ button:focus-visible {
 
 .navbar-link{
   text-decoration: none;
+}
+
+.shop-content{
+  display: grid;
+  grid-template-rows: auto auto auto;
+  position: absolute;
+  top: 0;
+}
+
+.shop-header{
+  display: grid;
+  justify-content: center;
+  height: max(5svh);
+  padding: 0;
 }
 
 .all-collections-list{
@@ -223,6 +245,7 @@ button:focus-visible {
   grid-template-columns: auto auto;
   padding: 0;
   margin: 0;
+  margin-top: min(1em);
 }
 
 .collections-search-bar{
@@ -327,9 +350,12 @@ button:focus-visible {
 
 .collection-banner{
   display: grid;
+  position: absolute;
   width: 100vw;
   height: max(25svh);
   object-fit: cover;
+  top: 4svh;
+  z-index: 0;
 }
 
 .collection-stats-list{
@@ -371,4 +397,26 @@ button:focus-visible {
 
 .plot{
   max-width: 100vw;
+}
+
+.collection-image-container{
+  position: absolute;
+  top: 200%;
+  left: 3%;
+}
+
+.collection-page-collection-image{
+  display: grid;
+  object-fit: contain;
+  width: 5em;
+  height: 5em;
+  border-radius: 1em;
+  border-color: black;
+  border-width: 0.1em;
+  border-style: solid;
+}
+
+.single-collection-body{
+  position: absolute;
+  top: 34svh;
 }

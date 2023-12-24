@@ -46,7 +46,7 @@ const OrderBookPlot = ({orderBookData}) => {
     ];
 
     const annotation = {
-      x: 0,
+      x: 0.1,
       y: 0.8,
       xref: 'paper',
       yref: 'paper',
