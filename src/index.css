@@ -401,7 +401,7 @@ button:focus-visible {
 
 .collection-image-container{
   position: absolute;
-  top: 200%;
+  top: 275%;
   left: 3%;
 }
 
@@ -419,4 +419,30 @@ button:focus-visible {
 .single-collection-body{
   position: absolute;
   top: 34svh;
+}
+
+.collection-name{
+  font-size: x-large;
+}
+
+.collection-description{
+  font-style: italic;
+}
+
+.collection-links-list{
+  display: flex;
+  gap: min(1em);
+  list-style-type: none;
+  padding: none;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: -4%;
+  left: 15%;
+  text-align: center;
+}
+
+.fa-globe,
+.collection-link-icon{
+  width: max(1.75em);
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import PaginationRow from './PaginationRow'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import fetchCollectionSlug from '../scripts/fetchCollectionSlug.js'
 import Loading from './Loading.jsx'
 import VolumePlot from './VolumePlot.jsx'
@@ -359,8 +359,8 @@ const SingleCollection = () => {
     if(loading) return <Loading/>
 
     
-    console.log(nftLlamaCollectionData)
-    // console.log(openSeaCollectionNFTs)
+    //console.log(nftLlamaCollectionData)
+    console.log(openSeaCollectionData)
 
     let startCollectionIndex = (25 * currentpage)
     let endCollectionIndex = (25 * currentpage) + 24
@@ -409,9 +409,79 @@ const SingleCollection = () => {
                         </div>
                     )
                 }
-                <div>{collection.name}</div>
             </div>
             <div className='single-collection-body'>
+                <div className='collection-body-text'>
+                    <div className='collection-name'><strong>{collection.name}</strong></div>
+                    {
+                        openSeaCollectionData &&
+                        openSeaCollectionData.description &&
+                            <div className='collection-description'>{openSeaCollectionData.description}</div>
+                    }
+                    {
+                        openSeaCollectionData &&
+                        collection &&
+                        (
+                            <ul className='collection-links-list'>
+                                {
+                                    openSeaCollectionData.project_url !== undefined &&
+                                    openSeaCollectionData.project_url !== "" &&
+                                    <li className='collection-project-url'>
+                                        <Link to={openSeaCollectionData.project_url} target='_blank'>
+                                            <i className='fas fa-globe fa-lg'></i>
+                                        </Link>
+                                    </li>
+                                }
+                                {
+                                    openSeaCollectionData.discord_url !== undefined &&
+                                    openSeaCollectionData.discord_url !== "" &&
+                                    <li className='collection-discord-url'>
+                                        <Link to={openSeaCollectionData.discord_url} target='_blank'>
+                                            <img className='collection-link-icon' src="https://www.svgrepo.com/show/353655/discord-icon.svg" alt="discord icon" />
+                                        </Link>
+                                    </li>
+                                }
+                                {
+                                    openSeaCollectionData.contracts !== undefined &&
+                                    openSeaCollectionData.contracts[0].address !== undefined &&
+                                    <li className='collection-etherscan'>
+                                        <Link to={`https://etherscan.io/address/${openSeaCollectionData.contracts[0].address}`} target='_blank'>
+                                            <img src="https://etherscan.io/images/brandassets/etherscan-logo-circle-light.svg" alt="etherscan icon" className='collection-link-icon' />
+                                        </Link>
+                                    </li>
+                                }
+                                {
+                                    openSeaCollectionData.instagram_username !== undefined &&
+                                    openSeaCollectionData.instagram_username !== "" &&
+                                    <li className='collection-instagram-username'>
+                                        <Link to={`https://www.instagram.com/${openSeaCollectionData.instagram_username}`} target='_blank'>
+                                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Instagram.svg/1200px-Instagram.svg.png" alt="instagram icon" className='collection-link-icon' />
+                                        </Link>
+                                    </li>
+                                }
+                                {
+                                    openSeaCollectionData.telegram_url !== undefined &&
+                                    openSeaCollectionData.telegram_url !== "" &&
+                                    <li className='collection-telegram-url'>
+                                        <Link to={`https://t.me/${openSeaCollectionData.telegram_url}`} target='_blank'>
+                                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/2048px-Telegram_logo.svg.png" alt="telegram icon" className='collection-link-icon'/>
+                                        </Link>
+                                    </li>
+                                }
+                                {
+                                    openSeaCollectionData.twitter_username !== undefined &&
+                                    openSeaCollectionData.twitter_username !== "" &&
+                                    <li className='collection-twitter-username'>
+                                        <Link to={`https://twitter.com/${openSeaCollectionData.twitter_username}`} target='_blank'>
+                                            <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/x-social-media-logo-icon.png" alt="x icon" className='collection-link-icon'/>
+                                        </Link>
+                                    </li>
+                                }
+                            </ul>
+                        )
+                        
+                    }
+                </div>
                 <ul className='collection-stats-list'>
                     <li className='collection-stats-volume collection-stat'>
                         {
