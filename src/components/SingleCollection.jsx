@@ -614,7 +614,7 @@ const SingleCollection = () => {
                             openSeaCollectionNFTs &&
                             openSeaCollectionNFTs.slice(startCollectionIndex, endCollectionIndex).map((nft) => {
                                 return (
-                                    <li key={nft.identifier}>
+                                    <li key={nft.identifier} className='nfts-list-item'>
                                         {nft.identifier}
                                     </li>
                                 )

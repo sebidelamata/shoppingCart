@@ -7,9 +7,9 @@ const CollectionCard = ({collection}) => {
 
     const bullBearFontColor = (pctChange) => {
         if(pctChange > 0){
-            return 'green'
+            return 'rgb(0,255,0)'
         } else if(pctChange < 0){
-            return 'red'
+            return 'rgb(255,0,255)'
         } else { return 'white'}
     }
 

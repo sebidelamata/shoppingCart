@@ -18,7 +18,9 @@ const Navbar = () => {
                 <Link to={'/shop'} className='navbar-link'>Shop</Link>
             </li>
             <li className='navbar-list-item'>
-                <Link to={'/checkout'} className='navbar-link'>Checkout</Link>
+                <Link to={'/checkout'} className='navbar-link'>
+                    <i className="fas fa-shopping-cart"></i>
+                </Link>
             </li>
             <li className='navbar-list-item'>
                 <Link to={'/docs'} className='navbar-link'>Docs</Link>

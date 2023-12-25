@@ -2,6 +2,8 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  max-width: 100vw;
+  width: 100vw;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -39,8 +41,8 @@ h1 {
   padding: 0;
   padding-top: 2svh;
   margin: 0;
-  -webkit-text-stroke: 0.025em black;
-  text-stroke: 0.025em black;
+  -webkit-text-stroke: 0.015em black;
+  text-stroke: 0.015em black;
   z-index: 2;
 }
 
@@ -125,6 +127,7 @@ button:focus-visible {
   grid-template-rows: auto auto auto;
   position: absolute;
   top: 0;
+  width: 100vw;
 }
 
 .shop-header{
@@ -361,6 +364,7 @@ button:focus-visible {
 .collection-stats-list{
   display: grid;
   list-style-type: none;
+  width: 100vw;
   padding: 0;
   margin: 0;
   justify-content: center;
@@ -424,10 +428,16 @@ button:focus-visible {
 
 .collection-name{
   font-size: x-large;
+  display: grid;
+  width: 100vw;
 }
 
 .collection-description{
   font-style: italic;
+  display: grid;
+  width: min(90vw);
+  max-width: 100vw;
+  word-wrap: break-word;
 }
 
 .collection-links-list{
@@ -446,4 +456,20 @@ button:focus-visible {
 .fa-globe,
 .collection-link-icon{
   width: max(1.75em);
+}
+
+
+.nfts-list{
+  display: grid;
+  width: 100vw;
+  max-width: 100vw;
+  word-wrap: break-word;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.nfts-list-item{
+  display: grid;
+  width: max(100vw);
+  word-wrap: break-word;
 }
