@@ -88,29 +88,49 @@ button:focus-visible {
 
 .navbar{
   display: grid;
-  grid-template-columns: auto auto;
-  align-items: end;
-  justify-content: space-between;
+  grid-template-rows: repeat(2, auto);
+  align-items: center;
+  justify-content: center;
   width: 100vw;
   height: max(3svh);
+  gap: min(0.2em);
+}
+
+.navbar-row-1{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: end;
+  justify-content: space-between;
+  height: max(3svh);
+  width: 100vw;
+}
+
+.navbar-row-2{
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  height: max(3svh);
+  width: 100vw;
 }
 
 .navbar-name-and-logo{
   display: grid;
   grid-template-columns: auto auto;
   justify-content: center;
-  align-items: center;
+  align-items: baseline;
+  font-size: medium;
 }
 
 .navbar-list{
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(4, auto);
+  grid-template-columns: repeat(3, auto);
   gap: min(0.4em);
   padding: 0;
   margin: 0;
-  align-items: center;
+  align-items: baseline;
   justify-content: center;
+  font-size: medium;
 }
 
 .fa-shopping-cart{
@@ -124,7 +144,7 @@ button:focus-visible {
 
 .shop-content{
   display: grid;
-  grid-template-rows: auto auto auto;
+  grid-template-rows: 8svh auto auto;
   position: absolute;
   top: 0;
   width: 100vw;
@@ -135,6 +155,7 @@ button:focus-visible {
   justify-content: center;
   height: max(5svh);
   padding: 0;
+  top: 38svh;
 }
 
 .all-collections-list{
@@ -365,7 +386,7 @@ button:focus-visible {
   width: 100vw;
   height: max(25svh);
   object-fit: cover;
-  top: 4svh;
+  top: 8svh;
   z-index: 0;
 }
 
@@ -414,7 +435,7 @@ button:focus-visible {
 
 .collection-image-container{
   position: absolute;
-  top: 275%;
+  top: 188%;
   left: 3%;
 }
 
@@ -456,7 +477,7 @@ button:focus-visible {
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: -4%;
+  top: -1.5%;
   left: 15%;
   text-align: center;
 }
@@ -480,4 +501,13 @@ button:focus-visible {
   display: grid;
   width: max(100vw);
   word-wrap: break-word;
+}
+
+.wallet-connect-button{
+  width: max(1em);
+}
+
+.home-page{
+  display: grid;
+  grid-template-rows: 7svh auto;
 }
