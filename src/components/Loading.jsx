@@ -1,4 +1,4 @@
-import Paperboat from '../../public/Paperboat.svg'
+import Paperboat from '/Paperboat.svg'
 
 
 const Loading = () => {

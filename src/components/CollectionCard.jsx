@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import blank_nft from '../../public/blank_nft.svg'
-import eth_icon from '../../public/ethereum_icon.png'
+import blank_nft from '/blank_nft.svg'
+import eth_icon from '/ethereum_icon.png'
 import { Link } from 'react-router-dom'
 
 const CollectionCard = ({collection}) => {

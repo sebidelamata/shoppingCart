@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import Paperboat from '../../public/Paperboat.svg'
+import Paperboat from '/Paperboat.svg'
 import Navbar from '../components/Navbar'
 import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/react'
 import { WagmiConfig } from 'wagmi'
