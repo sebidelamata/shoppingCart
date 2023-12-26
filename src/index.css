@@ -155,7 +155,7 @@ button:focus-visible {
   justify-content: center;
   height: max(5svh);
   padding: 0;
-  top: 38svh;
+  top: 8svh;
 }
 
 .all-collections-list{
@@ -473,18 +473,26 @@ button:focus-visible {
   display: flex;
   gap: min(1em);
   list-style-type: none;
-  padding: none;
+  padding: 0.4em;
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: -1.5%;
-  left: 15%;
+  top: -5.5%;
+  left: 35%;
   text-align: center;
+  backdrop-filter: blur(12em);
+  border-radius: 1em;
+  border-width: 0.1em;
+  border-style: solid;
+  border-color: white;
 }
 
 .fa-globe,
 .collection-link-icon{
   width: max(1.75em);
+  display: grid;
+  align-items: center;
+  justify-content: center;
 }
 
 
