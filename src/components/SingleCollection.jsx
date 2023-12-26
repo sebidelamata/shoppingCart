@@ -29,6 +29,12 @@ const SingleCollection = () => {
         const [error, setError] = useState(null)
         const [loading, setLoading] = useState(true)
 
+        const [OpenSeaCollectionDataError, setOpenSeaCollectionDataError] = useState(null)
+        const [OpenSeaCollectionDataLoading, setOpenSeaCollectionDataLoading] = useState(true)
+
+        const [OpenSeaCollectionNFTsError, setOpenSeaCollectionNFTsError] = useState(null)
+        const [OpenSeaCollectionNFTsLoading, setOpenSeaCollectionNFTsLoading] = useState(true)
+
         const [volumeError, setVolumeError] = useState(null)
         const [volumeLoading, setVolumeLoading] = useState(true)
 
@@ -239,20 +245,34 @@ const SingleCollection = () => {
         }
 
         useEffect(() => {
-            const handleFetches = async () => {
+            const handleFetch = async () => {
                 try{
                     await fetchLlammaNFTCollectionData(collection.collectionId)
-                    await fetchOpenSeaCollectionData(collection)
-                    await fetchOpenSeaCollectionNFTs(collection)
-                } catch(error){
+                }
+                catch{
                     setError(error.message)
-                }  finally{
+                }
+                finally{
                     setLoading(false)
                 }
             }
+            handleFetch()
+        },[])
 
-            handleFetches()
-        }, [])
+        useEffect(() => {
+            const handleFetch = async () => {
+                try{
+                    await fetchOpenSeaCollectionData(collection)
+                }
+                catch{
+                    setOpenSeaCollectionDataError(error.message)
+                }
+                finally{
+                    setOpenSeaCollectionDataLoading(false)
+                }
+            }
+            handleFetch()
+        },[])
 
         //separate useEffect for the looped fetch
         useEffect(() => {
@@ -260,14 +280,14 @@ const SingleCollection = () => {
                 try{
                     await fetchOpenSeaCollectionNFTs(collection)
                 } catch(error){
-                    setError(error.message)
+                    setOpenSeaCollectionNFTsError(error.message)
                 }  finally{
-                    setLoading(false)
+                    setOpenSeaCollectionNFTsLoading(false)
                 }
             }
 
             handleFetches()
-        }, [])
+        }, [collection])
 
         useEffect(() => {
             if(showVolumeData){
@@ -303,6 +323,10 @@ const SingleCollection = () => {
             openSeaCollectionNFTs, 
             error, 
             loading,
+            OpenSeaCollectionDataError,
+            OpenSeaCollectionDataLoading,
+            OpenSeaCollectionNFTsError,
+            OpenSeaCollectionNFTsLoading,
             volumeError,
             volumeLoading, 
             floorPriceError,
@@ -334,6 +358,10 @@ const SingleCollection = () => {
         openSeaCollectionNFTs, 
         error, 
         loading,
+        OpenSeaCollectionDataError,
+        OpenSeaCollectionDataLoading,
+        OpenSeaCollectionNFTsError,
+        OpenSeaCollectionNFTsLoading,
         volumeError,
         volumeLoading,
         floorPriceError,
@@ -384,22 +412,34 @@ const SingleCollection = () => {
     return(
         <div className='single-collection'>
             <div className='collection-header'>
-                <div className='collection-banner-container'>
-                    {
-                        openSeaCollectionData &&
-                        openSeaCollectionData.banner_image_url !== "" &&
-                        (
-                            <img className='collection-banner' src={openSeaCollectionData.banner_image_url} alt={`${collection.name} banner image`} />
-                        )
-                    }
-                    {
-                        openSeaCollectionData &&
-                        openSeaCollectionData.banner_image_url === "" &&
-                        (
-                            <img className='collection-banner' src={blankNFT} alt={`blank banner image`} />
-                        )
-                    }
-                </div>
+                { OpenSeaCollectionDataError &&
+                    <div>
+                        A network error was encountered
+                    </div>
+                }
+                {
+                    OpenSeaCollectionDataLoading === true &&
+                    <Loading/>
+                }
+                {
+                    openSeaCollectionData &&
+                    <div className='collection-banner-container'>
+                        {
+                            openSeaCollectionData &&
+                            openSeaCollectionData.banner_image_url !== "" &&
+                            (
+                                <img className='collection-banner' src={openSeaCollectionData.banner_image_url} alt={`${collection.name} banner image`} />
+                            )
+                        }
+                        {
+                            openSeaCollectionData &&
+                            openSeaCollectionData.banner_image_url === "" &&
+                            (
+                                <img className='collection-banner' src={blankNFT} alt={`blank banner image`} />
+                            )
+                        }
+                    </div>
+                }
                 {
                     nftLlamaCollectionData &&
                     nftLlamaCollectionData[0].image &&

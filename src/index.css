@@ -144,6 +144,14 @@ button:focus-visible {
   list-style-type: none;
   padding: 0;
   gap: 1em;
+  justify-content: center;
+  align-items: center;
+}
+
+.collection-card-image{
+  display: grid;
+  justify-content: center;
+  align-items: center;
 }
 
 .collection-card{

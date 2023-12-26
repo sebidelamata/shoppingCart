@@ -17,7 +17,7 @@ const CollectionCard = ({collection}) => {
         <Link className='collection-card' to={`/shop/collections/${collection.collectionId}`} state={collection}>
             {
                 (collection && collection.image) && (
-                    <div>
+                    <div className='collection-card-image'>
                         <img src={collection.image} className='collection-image' alt={`${collection.name} Image`} />
                     </div>
 
