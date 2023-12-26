@@ -6,7 +6,6 @@ const Docs = () => {
     return (
         <div className="docs-page">
             <Navbar/>
-            <WalletConnectButton/>
             <Loading/>
             <div>Docs</div>
         </div>

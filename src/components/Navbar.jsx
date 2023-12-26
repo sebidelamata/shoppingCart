@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import PaperBoat from '/PaperBoat.svg'
+import PaperBoat from '../../public/PaperBoat.svg'
+import WalletConnectButton from './WalletConnectButton'
 
 const Navbar = () => {
   return (
@@ -14,6 +15,9 @@ const Navbar = () => {
             </div>
         </Link>
         <ul className='navbar-list'>
+        <li className='navbar-list-item'>
+                <w3m-button/>
+            </li>
             <li className='navbar-list-item'>
                 <Link to={'/shop'} className='navbar-link'>Shop</Link>
             </li>

@@ -7,7 +7,7 @@ import VolumePlot from './VolumePlot.jsx'
 import FloorPricePlot from './FloorPricePlot.jsx'
 import SalesHistoryPlot from './SalesHistoryPlot.jsx'
 import OrderBookPlot from './OrderBookPlot.jsx'
-import blankNFT from '../../public/blank_nft.svg'
+import blankNFT from '/blank_nft.svg'
 
 const SingleCollection = () => {
 
