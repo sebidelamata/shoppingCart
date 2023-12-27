@@ -52,21 +52,21 @@ const AllCollections = () => {
     let endCollectionIndex = (25 * currentpage) + 24
     return(
         <>
-        <div className='shop-header-and-search'>
-        <h2>Collections</h2>
-        <SearchCollections allCollectionsURL={allCollectionsURL}/>
-        </div>
-        <ul className='all-collections-list'>
-            {
-                allCollectionsURL.slice(startCollectionIndex,endCollectionIndex).map((collection) => {
-                        return (
-                            <li key={collection.collectionId} className='all-collections-list-item'>
-                                <CollectionCard collection={collection}/>
-                            </li>
-                        )
-                })
-            }
-        </ul>
+            <div className='shop-header-and-search'>
+                <h2>Collections</h2>
+                <SearchCollections allCollectionsURL={allCollectionsURL}/>
+            </div>
+            <ul className='all-collections-list'>
+                {
+                    allCollectionsURL.slice(startCollectionIndex,endCollectionIndex).map((collection) => {
+                            return (
+                                <li key={collection.collectionId} className='all-collections-list-item'>
+                                    <CollectionCard collection={collection}/>
+                                </li>
+                            )
+                    })
+                }
+            </ul>
             <PaginationRow allCollectionsURL={allCollectionsURL} currentpage={currentpage} setCurrentPage={setCurrentPage}/>
         </>
     )

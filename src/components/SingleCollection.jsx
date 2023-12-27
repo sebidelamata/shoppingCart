@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import PaginationRow from './PaginationRow'
 import { Link, useLocation } from 'react-router-dom'
 import fetchCollectionSlug from '../scripts/fetchCollectionSlug.js'
 import Loading from './Loading.jsx'
@@ -8,6 +7,7 @@ import FloorPricePlot from './FloorPricePlot.jsx'
 import SalesHistoryPlot from './SalesHistoryPlot.jsx'
 import OrderBookPlot from './OrderBookPlot.jsx'
 import blankNFT from '/blank_nft.svg'
+import NFTsList from './NFTsList.jsx'
 
 const SingleCollection = () => {
 
@@ -21,7 +21,6 @@ const SingleCollection = () => {
         const [nftLlamaCollectionVolumeData, setNftLlamaCollectionVolumeData] = useState(null)
         const [nftLlammaCollectionFloorPriceData, setNftLlammaCollectionFloorPriceData] = useState(null)
         const [openSeaCollectionData, setOpenSeaCollectionData] = useState(null)
-        const [openSeaCollectionNFTs, setOpenSeaCollectionNFTs] = useState(null)
         const [llammaNFTSalesHistoryData, setLlammaNFTSalesHistoryData] = useState(null)
         const [llammaOrderBookData, setllammaOrderBookData] = useState(null)
 
@@ -31,9 +30,6 @@ const SingleCollection = () => {
 
         const [OpenSeaCollectionDataError, setOpenSeaCollectionDataError] = useState(null)
         const [OpenSeaCollectionDataLoading, setOpenSeaCollectionDataLoading] = useState(true)
-
-        const [OpenSeaCollectionNFTsError, setOpenSeaCollectionNFTsError] = useState(null)
-        const [OpenSeaCollectionNFTsLoading, setOpenSeaCollectionNFTsLoading] = useState(true)
 
         const [volumeError, setVolumeError] = useState(null)
         const [volumeLoading, setVolumeLoading] = useState(true)
@@ -46,9 +42,6 @@ const SingleCollection = () => {
 
         const [orderBookError, setOrderBookError] = useState(null)
         const [orderBookLoading, setOrderBookLoading] = useState(true)
-
-        //handle pagination
-        const [currentpage, setCurrentPage] = useState(0)
 
         // show stats collapsible
         const [showVolumeData, setShowVolumeData] = useState(false)
@@ -205,45 +198,6 @@ const SingleCollection = () => {
             }
         }
 
-        const fetchOpenSeaCollectionNFTs = async (collection) => {
-
-            let slug = await fetchCollectionSlug(collection.collectionId)
-
-            let allNFTs = []; // To store all NFTs
-            let nextPage = null; // To store the next page URL
-
-            const options = {
-                method: 'GET',
-                headers: {
-                    accept: 'application/json',
-                    'x-api-key': import.meta.env.VITE_OPENSEA_API_KEY
-                }
-            }
-
-
-            do{
-                const url = nextPage ? `https://api.opensea.io/api/v2/collection/${slug}/nfts?limit=200&next=${nextPage}` : `https://api.opensea.io/api/v2/collection/${slug}/nfts?limit=200`
-                try{
-                    const response = await fetch(url, options);
-                    // await new Promise(r => setTimeout(r, 10));
-                    
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! Status: ${response.status}`);
-                    }
-                    
-                    const data = await response.json();
-                    allNFTs = allNFTs.concat(await data.nfts);
-                    nextPage = await data.next;
-                } catch(error){
-                    setError(error.message)
-                } finally {
-                    setOpenSeaCollectionNFTs(allNFTs)
-                    setLoading(false)
-                }
-            } while (nextPage)
-
-        }
-
         useEffect(() => {
             const handleFetch = async () => {
                 try{
@@ -273,21 +227,6 @@ const SingleCollection = () => {
             }
             handleFetch()
         },[])
-
-        //separate useEffect for the looped fetch
-        useEffect(() => {
-            const handleFetches = async () => {
-                try{
-                    await fetchOpenSeaCollectionNFTs(collection)
-                } catch(error){
-                    setOpenSeaCollectionNFTsError(error.message)
-                }  finally{
-                    setOpenSeaCollectionNFTsLoading(false)
-                }
-            }
-
-            handleFetches()
-        }, [collection])
 
         useEffect(() => {
             if(showVolumeData){
@@ -319,14 +258,11 @@ const SingleCollection = () => {
             nftLlammaCollectionFloorPriceData,
             llammaNFTSalesHistoryData,
             llammaOrderBookData,
-            openSeaCollectionData,
-            openSeaCollectionNFTs, 
+            openSeaCollectionData, 
             error, 
             loading,
             OpenSeaCollectionDataError,
             OpenSeaCollectionDataLoading,
-            OpenSeaCollectionNFTsError,
-            OpenSeaCollectionNFTsLoading,
             volumeError,
             volumeLoading, 
             floorPriceError,
@@ -335,8 +271,6 @@ const SingleCollection = () => {
             salesLoading,
             orderBookError,
             orderBookLoading,
-            currentpage, 
-            setCurrentPage,
             showVolumeData, 
             setShowVolumeData,
             showFloorPriceData, 
@@ -354,14 +288,11 @@ const SingleCollection = () => {
         nftLlammaCollectionFloorPriceData,
         llammaNFTSalesHistoryData,
         llammaOrderBookData,
-        openSeaCollectionData,
-        openSeaCollectionNFTs, 
+        openSeaCollectionData, 
         error, 
         loading,
         OpenSeaCollectionDataError,
         OpenSeaCollectionDataLoading,
-        OpenSeaCollectionNFTsError,
-        OpenSeaCollectionNFTsLoading,
         volumeError,
         volumeLoading,
         floorPriceError,
@@ -370,8 +301,6 @@ const SingleCollection = () => {
         salesLoading,
         orderBookError,
         orderBookLoading,
-        currentpage, 
-        setCurrentPage,
         showVolumeData, 
         setShowVolumeData,
         showFloorPriceData, 
@@ -388,10 +317,6 @@ const SingleCollection = () => {
 
     
     //console.log(nftLlamaCollectionData)
-    console.log(openSeaCollectionData)
-
-    let startCollectionIndex = (25 * currentpage)
-    let endCollectionIndex = (25 * currentpage) + 24
 
     const handleVolumeClick = () => {
         setShowVolumeData(!showVolumeData)
@@ -645,22 +570,7 @@ const SingleCollection = () => {
                         }
                     </li>
                 </ul>
-                <ul className='nfts-list'>
-                        {
-                            !openSeaCollectionNFTs &&
-                            <Loading/>
-                        }
-                        {
-                            openSeaCollectionNFTs &&
-                            openSeaCollectionNFTs.slice(startCollectionIndex, endCollectionIndex).map((nft) => {
-                                return (
-                                    <li key={nft.identifier} className='nfts-list-item'>
-                                        {nft.identifier}
-                                    </li>
-                                )
-                            })
-                        }
-                </ul>
+                <NFTsList collection={collection}/>
             </div>
         </div>
     )
