@@ -48,8 +48,8 @@ const AllCollections = () => {
     if(error) return <p>A network error was encountered</p>
     if(loading) return <Loading/>
 
-    let startCollectionIndex = (25 * currentpage)
-    let endCollectionIndex = (25 * currentpage) + 24
+    let startCollectionIndex = (10 * currentpage)
+    let endCollectionIndex = (10 * currentpage) + 9
     return(
         <>
             <div className='shop-header-and-search'>

@@ -2,10 +2,9 @@ import { useEffect, useState } from "react"
 import PaginationRow from './PaginationRow'
 import fetchCollectionSlug from '../scripts/fetchCollectionSlug.js'
 import Loading from "./Loading.jsx"
+import SingleNFTCard from "./SingleNFTCard.jsx"
 
 const NFTsList = ({collection}) => {
-
-    console.log(collection)
 
     const NFTsListColllection = (collection) => {
 
@@ -75,7 +74,7 @@ const NFTsList = ({collection}) => {
             OpenSeaCollectionNFTsError,
             OpenSeaCollectionNFTsLoading,
             currentpage, 
-            setCurrentPage,
+            setCurrentPage
         }
 
     }
@@ -85,14 +84,14 @@ const NFTsList = ({collection}) => {
         OpenSeaCollectionNFTsError,
         OpenSeaCollectionNFTsLoading,
         currentpage, 
-        setCurrentPage,
+        setCurrentPage
     } = NFTsListColllection(collection)
 
     if(OpenSeaCollectionNFTsError) return <p>A network error was encountered</p>
     if(OpenSeaCollectionNFTsLoading) return <Loading/>
 
-    let startCollectionIndex = (25 * currentpage)
-    let endCollectionIndex = (25 * currentpage) + 24
+    let startCollectionIndex = (10 * currentpage)
+    let endCollectionIndex = (10 * currentpage) + 9
 
     return(
         <ul className='nfts-list'>
@@ -104,9 +103,12 @@ const NFTsList = ({collection}) => {
                 openSeaCollectionNFTs &&
                 openSeaCollectionNFTs.slice(startCollectionIndex, endCollectionIndex).map((nft) => {
                     return (
+                                <>
                                 <li key={nft.identifier} className='nfts-list-item'>
-                                    {nft.identifier}
+                                    <SingleNFTCard nft={nft}/>
                                 </li>
+                                <PaginationRow allCollectionsURL={collection} currentpage={currentpage} setCurrentPage={setCurrentPage}/>
+                                </>
                     )
                 })
             }

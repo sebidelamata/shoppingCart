@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const PaginationRow = ({allCollectionsURL, currentpage, setCurrentPage}) => {
-    const numPages = Math.ceil(allCollectionsURL.length / 25)
+    const numPages = Math.ceil(allCollectionsURL.length / 10)
 
     const handlePaginationPageClick = (e) => {
         let value = e.target.textContent - 1

@@ -2,16 +2,9 @@ import { useState, useEffect } from 'react'
 import blank_nft from '/blank_nft.svg'
 import eth_icon from '/ethereum_icon.png'
 import { Link } from 'react-router-dom'
+import bullBearFontColor from '../scripts/bullBearFontColor.js'
 
 const CollectionCard = ({collection}) => {
-
-    const bullBearFontColor = (pctChange) => {
-        if(pctChange > 0){
-            return 'rgb(0,255,0)'
-        } else if(pctChange < 0){
-            return 'rgb(255,0,255)'
-        } else { return 'white'}
-    }
 
     return(
         <Link className='collection-card' to={`/shop/collections/${collection.collectionId}`} state={collection}>

@@ -158,7 +158,8 @@ button:focus-visible {
   top: 8svh;
 }
 
-.all-collections-list{
+.all-collections-list,
+.nfts-list{
   display: flex;
   width: 100vw;
   flex-wrap: wrap;
@@ -175,7 +176,8 @@ button:focus-visible {
   align-items: center;
 }
 
-.collection-card{
+.collection-card,
+.single-nft-card{
   display: grid;
   justify-content: center;
   align-items: center;
@@ -184,6 +186,7 @@ button:focus-visible {
   border-style: solid;
   border-color: white;
   padding: 0.5em;
+  max-width: 100vw;
 }
 
 .collection-card-top-row{
@@ -192,7 +195,8 @@ button:focus-visible {
   gap: min(1em);
 }
 
-.collection-image{
+.collection-image,
+.nft-image{
   display: grid;
   object-fit: cover;
   height: 12em;
