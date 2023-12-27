@@ -17,7 +17,6 @@ const NFTsList = ({collection}) => {
         const [currentpage, setCurrentPage] = useState(0)
 
         const fetchOpenSeaCollectionNFTs = async (collection) => {
-            console.log(await collection)
             let slug = await fetchCollectionSlug(collection.collection.collectionId)
 
             let allNFTs = []; // To store all NFTs

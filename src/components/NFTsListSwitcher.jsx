@@ -27,7 +27,7 @@ const NFTsListSwitcher = (collection) => {
                 selectedButton === 'all' &&
                 <div className="all-nfts-list-and-title">
                     <div className="all-nfts-title">All NFTs</div>
-                    <NFTsList collection={collection}/>
+                    <NFTsList className='all-nfts-list' collection={collection}/>
                 </div>
             }
             {
