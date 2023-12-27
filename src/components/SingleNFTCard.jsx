@@ -1,8 +1,9 @@
 const SingleNFTCard = ({nft}) => {
     console.log(nft)
+    //fetch function here
     return(
         <div className="single-nft-card">
-            {nft.identifier}
+            <strong>{nft.identifier}</strong>
             {
                 nft &&
                 nft.image_url &&

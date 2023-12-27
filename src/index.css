@@ -318,6 +318,7 @@ button:focus-visible {
   gap: min(2em);
   padding-top: min(2em);
   padding-bottom: min(2em);
+  animation: zoom 0.5s ease-in-out;
 }
 
 .loading-icon-container{
@@ -410,6 +411,7 @@ button:focus-visible {
   display: grid;
   justify-content: center;
   align-items: center;
+  animation: zoom 0.5s ease-in-out;
 }
 
 .collection-stats-title{
@@ -435,6 +437,19 @@ button:focus-visible {
 
 .plot{
   max-width: 100vw;
+  animation: zoom 0.5s ease-in-out;
+}
+
+@keyframes zoom {
+  from {
+    transform: scale(0.8) scaleY(0) translateX(-20%);
+    transform: translateX(-20%);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateX(0) scaleY(1);
+    opacity: 1;
+  }
 }
 
 .collection-image-container{
@@ -457,6 +472,8 @@ button:focus-visible {
 .single-collection-body{
   position: absolute;
   top: 34svh;
+  display: grid;
+  gap: min(3em);
 }
 
 .collection-name{
@@ -481,7 +498,7 @@ button:focus-visible {
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: -5.5%;
+  top: -3.5%;
   left: 35%;
   text-align: center;
   backdrop-filter: blur(12em);
@@ -508,6 +525,7 @@ button:focus-visible {
   list-style-type: none;
   margin: 0;
   padding: 0;
+  animation: zoom 0.5s ease-in-out;
 }
 .nfts-list-item{
   display: grid;
@@ -522,4 +540,39 @@ button:focus-visible {
 .home-page{
   display: grid;
   grid-template-rows: 7svh auto;
+}
+
+.nft-list-and-switcher{
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: min(1em);
+}
+
+.nft-list-switcher{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: min(0.5em);
+}
+
+.all-nfts-button,
+.listed-nfts-button{
+  padding-left: max(1em);
+  padding-right: max(1em);
+}
+
+.all-nfts-list-and-title,
+.listed-nfts-list-and-title{
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: min(2em);
+}
+
+.all-nfts-title,
+.listed-nfts-title{
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-weight: 900;
+  font-size: large;
 }

@@ -7,7 +7,7 @@ import FloorPricePlot from './FloorPricePlot.jsx'
 import SalesHistoryPlot from './SalesHistoryPlot.jsx'
 import OrderBookPlot from './OrderBookPlot.jsx'
 import blankNFT from '/blank_nft.svg'
-import NFTsList from './NFTsList.jsx'
+import NFTsListSwitcher from './NFTsListSwitcher.jsx'
 
 const SingleCollection = () => {
 
@@ -570,7 +570,7 @@ const SingleCollection = () => {
                         }
                     </li>
                 </ul>
-                <NFTsList collection={collection}/>
+                <NFTsListSwitcher collection={collection}/>
             </div>
         </div>
     )

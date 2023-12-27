@@ -17,8 +17,8 @@ const NFTsList = ({collection}) => {
         const [currentpage, setCurrentPage] = useState(0)
 
         const fetchOpenSeaCollectionNFTs = async (collection) => {
-
-            let slug = await fetchCollectionSlug(collection.collectionId)
+            console.log(await collection)
+            let slug = await fetchCollectionSlug(collection.collection.collectionId)
 
             let allNFTs = []; // To store all NFTs
             let nextPage = null; // To store the next page URL
@@ -67,7 +67,7 @@ const NFTsList = ({collection}) => {
             };
         
             handleFetches();
-        }, [collection]);
+        }, []);
 
         return {
             openSeaCollectionNFTs,
@@ -101,16 +101,24 @@ const NFTsList = ({collection}) => {
             }
             {
                 openSeaCollectionNFTs &&
-                openSeaCollectionNFTs.slice(startCollectionIndex, endCollectionIndex).map((nft) => {
-                    return (
-                                <>
-                                <li key={nft.identifier} className='nfts-list-item'>
-                                    <SingleNFTCard nft={nft}/>
-                                </li>
-                                <PaginationRow allCollectionsURL={collection} currentpage={currentpage} setCurrentPage={setCurrentPage}/>
-                                </>
-                    )
-                })
+                (
+                    <>
+                        <div className="nft-cards-list">
+                            {
+                                openSeaCollectionNFTs.slice(startCollectionIndex, endCollectionIndex).map((nft) => {
+                                    return (
+                                                <>
+                                                <li key={nft.identifier} className='nfts-list-item'>
+                                                    <SingleNFTCard nft={nft}/>
+                                                </li>
+                                                </>
+                                    )
+                                })
+                            }
+                        </div>
+                        <PaginationRow allCollectionsURL={collection} currentpage={currentpage} setCurrentPage={setCurrentPage}/>
+                    </>
+                )
             }
         </ul>
     )

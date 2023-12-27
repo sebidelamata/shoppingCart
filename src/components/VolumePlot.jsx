@@ -53,7 +53,7 @@ const VolumePlot = ({volumeData}) => {
       y: 0.8,
       xref: 'paper',
       yref: 'paper',
-      text: `Avg Daily Volume ${mean.toFixed(4)} ETH<br>Standard Deviation ${stdDev.toFixed(4)} ETH<br>7-Day Avg ${oneWeekMovingAverage.toFixed(4)} ETH<br>Last Daily Volume ${yData[yData.length - 1].toFixed(4)} ETH`,
+      text: `Avg Daily Volume ${mean.toFixed(4) || 0} ETH<br>Standard Deviation ${stdDev.toFixed(4) || 0} ETH<br>7-Day Avg ${oneWeekMovingAverage.toFixed(4) || 0} ETH<br>Last Daily Volume ${(yData[yData.length - 1] || 0).toFixed(4) || 0} ETH`,
       showarrow: true,
       arrowhead: 4,
       ax: 0,
