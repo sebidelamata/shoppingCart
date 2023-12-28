@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Loading from "./Loading";
 import { Link } from "react-router-dom";
 
-const SingleListedNFTCard = ({listing}) => {
+const SingleListedNFTCard = ({listing, collection}) => {
 
     const OpenSeaSingleNFT = (listing) => {
         const [openSeaSingleNFTData, setOpenSeaSingleNFTData] = useState(null)
@@ -56,7 +56,11 @@ const SingleListedNFTCard = ({listing}) => {
     return(
         openSeaSingleNFTData &&
         listing.protocol_data.parameters &&
-        <Link to={`/shop/collections/${openSeaSingleNFTData.nft.contract}/${openSeaSingleNFTData.nft.identifier}`}>
+        <Link 
+            to={`/shop/collections/${openSeaSingleNFTData.nft.contract}/${openSeaSingleNFTData.nft.identifier}`}
+            className="single-nft-card"
+            state={[openSeaSingleNFTData, listing, collection]}
+        >
             <div className="single-listed-nft-card">
                 <strong>{openSeaSingleNFTData.nft.name}</strong>
             </div>

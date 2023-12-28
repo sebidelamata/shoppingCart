@@ -110,7 +110,7 @@ const ListedNFTsList = ({collection}) => {
                                     return (
                                                 listing &&
                                                 <li key={listing.order_hash} className='nfts-list-item'>
-                                                    <SingleListedNFTCard listing={listing}/>
+                                                    <SingleListedNFTCard listing={listing} collection={collection}/>
                                                 </li>
                                     )
                                 })

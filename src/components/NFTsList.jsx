@@ -108,7 +108,7 @@ const NFTsList = ({collection}) => {
                                     return (
                                                 nft.image_url &&
                                                 <li key={nft.identifier} className='nfts-list-item'>
-                                                    <SingleNFTCard nft={nft}/>
+                                                    <SingleNFTCard nft={nft} collection={collection}/>
                                                 </li>
                                     )
                                 })

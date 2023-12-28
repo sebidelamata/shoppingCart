@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react"
 import Loading from "./Loading"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 
-const SingleNFTCard = ({nft}) => {
+const SingleNFTCard = ({nft, collection}) => {
+
     console.log(nft)
     const OpenSeaSingleNFT = (nft) => {
         const [openSeaSingleNFTData, setOpenSeaSingleNFTData] = useState(null)
@@ -52,7 +53,11 @@ const SingleNFTCard = ({nft}) => {
     //fetch function here
     return(
         nft.image_url &&
-        <Link to={`/shop/collections/${openSeaSingleNFTData.nft.contract}/${openSeaSingleNFTData.nft.identifier}`} className="single-nft-card">
+        <Link 
+            to={`/shop/collections/${openSeaSingleNFTData.nft.contract}/${openSeaSingleNFTData.nft.identifier}`} 
+            className="single-nft-card"
+            state={[openSeaSingleNFTData, null, collection]}
+        >
             <strong>{nft.name}</strong>
             {
                 nft &&

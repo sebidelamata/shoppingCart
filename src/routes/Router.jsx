@@ -6,7 +6,7 @@ import Checkout from './Checkout'
 import AllCollections from '../components/AllCollections.jsx'
 import Docs from './Docs.jsx'
 import SingleCollection from '../components/SingleCollection.jsx'
-import NFTPage from '../components/NFTPage.jsx'
+import NFTPage from './NFTPage.jsx'
 
 const CustomRouter = () => {
     const router = createBrowserRouter([
