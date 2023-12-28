@@ -160,7 +160,8 @@ button:focus-visible {
 
 .all-collections-list,
 .nft-cards-list,
-.nfts-list{
+.nfts-list,
+.listed-nfts-list{
   display: flex;
   width: 100vw;
   flex-wrap: wrap;

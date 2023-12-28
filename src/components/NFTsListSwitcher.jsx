@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import NFTsList from "./NFTsList";
+import ListedNFTsList from './ListedNFTsList'
 
 const NFTsListSwitcher = (collection) => {
 
-    const [selectedButton, setSelectedButton] = useState('all')
+    const [selectedButton, setSelectedButton] = useState('listed')
 
     const handleAllNFTsClick = () => {
         if(selectedButton === 'listed'){
@@ -20,8 +21,8 @@ const NFTsListSwitcher = (collection) => {
     return(
         <div  className="nft-list-and-switcher">
             <div className="nft-list-switcher">
-                <button className="all-nfts-button" onClick={() => handleAllNFTsClick()} autoFocus>All NFTs</button>
-                <button className="listed-nfts-button" onClick={() => handleListedNFTsClick()}>Listed NFTs</button>
+                <button className="all-nfts-button" onClick={() => handleAllNFTsClick()} >All NFTs</button>
+                <button className="listed-nfts-button" onClick={() => handleListedNFTsClick()} autoFocus>Listed NFTs</button>
             </div>
             {
                 selectedButton === 'all' &&
@@ -33,7 +34,7 @@ const NFTsListSwitcher = (collection) => {
             {
                 selectedButton === 'listed' &&
                 <div className="listed-nfts-list-and-title">
-                    <div className="listed-nfts-title">Listed NFTs</div>
+                    <ListedNFTsList className="listed-nfts-title" collection={collection}/>
                 </div>
             }
         </div>
