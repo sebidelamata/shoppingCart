@@ -108,11 +108,10 @@ const ListedNFTsList = ({collection}) => {
                             {
                                 listedOpenSeaCollectionNFTs.slice(startCollectionIndex, endCollectionIndex).map((listing) => {
                                     return (
-                                                <>
+                                                listing &&
                                                 <li key={listing.order_hash} className='nfts-list-item'>
                                                     <SingleListedNFTCard listing={listing}/>
                                                 </li>
-                                                </>
                                     )
                                 })
                             }

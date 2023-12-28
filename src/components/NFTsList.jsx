@@ -106,11 +106,10 @@ const NFTsList = ({collection}) => {
                             {
                                 openSeaCollectionNFTs.slice(startCollectionIndex, endCollectionIndex).map((nft) => {
                                     return (
-                                                <>
+                                                nft.image_url &&
                                                 <li key={nft.identifier} className='nfts-list-item'>
                                                     <SingleNFTCard nft={nft}/>
                                                 </li>
-                                                </>
                                     )
                                 })
                             }

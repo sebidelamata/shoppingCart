@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import Loading from "./Loading"
+import { Link } from "react-router-dom"
 
 const SingleNFTCard = ({nft}) => {
     console.log(nft)
@@ -50,7 +51,8 @@ const SingleNFTCard = ({nft}) => {
 
     //fetch function here
     return(
-        <div className="single-nft-card">
+        nft.image_url &&
+        <Link to={`/shop/collections/${openSeaSingleNFTData.nft.contract}/${openSeaSingleNFTData.nft.identifier}`} className="single-nft-card">
             <strong>{nft.name}</strong>
             {
                 nft &&
@@ -70,7 +72,7 @@ const SingleNFTCard = ({nft}) => {
                     </a>
                 )
             }
-        </div>
+        </Link>
     )
 }
 
