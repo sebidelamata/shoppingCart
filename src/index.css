@@ -173,6 +173,15 @@ button:focus-visible {
   animation: zoom 0.5s ease-in-out;
 }
 
+.listed-nfts-list{
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: auto;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
 .collection-card-image{
   display: grid;
   justify-content: center;
@@ -207,6 +216,12 @@ button:focus-visible {
   display: grid;
   grid-template-columns: auto auto;
   gap: min(1em);
+}
+
+.nft-image-container{
+  display: grid;
+  justify-content: center;
+  align-items: center;
 }
 
 .collection-image,
@@ -512,8 +527,8 @@ button:focus-visible {
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: -3.5%;
-  left: 35%;
+  top: -2%;
+  left: 40%;
   text-align: center;
   backdrop-filter: blur(12em);
   border-radius: 1em;
@@ -548,13 +563,15 @@ button:focus-visible {
 .nft-list-switcher{
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: min(0.5em);
+  gap: min(1em);
 }
 
 .all-nfts-button,
 .listed-nfts-button{
-  padding-left: max(1em);
-  padding-right: max(1em);
+  padding-left: max(0.5em);
+  padding-right: max(0.5em);
+  margin-left: 2.25em;
+  margin-right: 2.25em;
 }
 
 .all-nfts-list-and-title,
@@ -572,4 +589,24 @@ button:focus-visible {
   text-align: center;
   font-weight: 900;
   font-size: large;
+}
+
+.nfts-list-item{
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1.5em;
+  border-width: 2px;
+  border-style: solid;
+  border-color: white;
+  padding: 0.5em;
+}
+
+.listed-nft-cards-list{
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: min(1em)
 }

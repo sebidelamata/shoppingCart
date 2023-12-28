@@ -8,7 +8,7 @@ const SingleListedNFTCard = ({listing}) => {
         const [error, setError] = useState(null)
         const [loading, setLoading] = useState(true)
 
-        const fetchSingleNFTOpenSea = async (nft) => {
+        const fetchSingleNFTOpenSea = async (listing) => {
 
             const options = {
                 method: 'GET',
@@ -21,7 +21,6 @@ const SingleListedNFTCard = ({listing}) => {
             const url = `https://api.opensea.io/api/v2/chain/ethereum/contract/${listing.protocol_data.parameters.offer[0].token}/nfts/${listing.protocol_data.parameters.offer[0].identifierOrCriteria}`;
             try{
                 const response = await fetch(url, options);
-              console.log(response)
                   if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                   }
@@ -48,15 +47,25 @@ const SingleListedNFTCard = ({listing}) => {
         loading
     } = OpenSeaSingleNFT(listing)
 
-    console.log(openSeaSingleNFTData)
+    console.log(listing)
 
     if(error) return <p>A network error was encountered</p>
     if(loading) return <Loading/>
 
     return(
-        <div className="single-listed-nft-card">
-            {listing.protocol_data.parameters.offer[0].identifierOrCriteria}
-        </div>
+        openSeaSingleNFTData &&
+        listing.protocol_data.parameters &&
+        <>
+            <div className="single-listed-nft-card">
+                <strong>{openSeaSingleNFTData.nft.name}</strong>
+            </div>
+            <div className="nft-image-container">
+                <img className="nft-image" src={openSeaSingleNFTData.nft.image_url} alt={`nft ${openSeaSingleNFTData.nft.identifier} image`} />
+            </div>
+            <div className="nft-card-offer">
+                {`Offer: ${listing.price.current.value / (10 ** listing.price.current.decimals)} ${listing.price.current.currency}`}
+            </div>
+        </>
     )
 }
 

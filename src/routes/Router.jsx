@@ -6,6 +6,7 @@ import Checkout from './Checkout'
 import AllCollections from '../components/AllCollections.jsx'
 import Docs from './Docs.jsx'
 import SingleCollection from '../components/SingleCollection.jsx'
+import NFTPage from '../components/NFTPage.jsx'
 
 const CustomRouter = () => {
     const router = createBrowserRouter([
@@ -24,7 +25,13 @@ const CustomRouter = () => {
             },
             {
               path: '/shop/collections/:collectionName',
-              element: <SingleCollection />
+              element: <SingleCollection />,
+              children: [
+                {
+                  path: '/shop/collections/:collectionName/:nft',
+                  element: <NFTPage />
+                }
+              ]
             }
           ]
         },
