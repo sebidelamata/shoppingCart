@@ -3,8 +3,7 @@ import Loading from "./Loading"
 import { Link, useLocation } from "react-router-dom"
 
 const SingleNFTCard = ({nft, collection}) => {
-
-    console.log(nft)
+    
     const OpenSeaSingleNFT = (nft) => {
         const [openSeaSingleNFTData, setOpenSeaSingleNFTData] = useState(null)
         const [error, setError] = useState(null)
@@ -56,7 +55,7 @@ const SingleNFTCard = ({nft, collection}) => {
         <Link 
             to={`/shop/collections/${openSeaSingleNFTData.nft.contract}/${openSeaSingleNFTData.nft.identifier}`} 
             className="single-nft-card"
-            state={[openSeaSingleNFTData, null, collection]}
+            state={[openSeaSingleNFTData, collection]}
         >
             <strong>{nft.name}</strong>
             {

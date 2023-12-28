@@ -59,12 +59,12 @@ const SingleListedNFTCard = ({listing, collection}) => {
         <Link 
             to={`/shop/collections/${openSeaSingleNFTData.nft.contract}/${openSeaSingleNFTData.nft.identifier}`}
             className="single-nft-card"
-            state={[openSeaSingleNFTData, listing, collection]}
+            state={[openSeaSingleNFTData, collection]}
         >
             <div className="single-listed-nft-card">
                 <strong>{openSeaSingleNFTData.nft.name}</strong>
             </div>
-            <div className="nft-image-container">
+            <div className="nft-list-nft-image-container">
                 <img className="nft-image" src={openSeaSingleNFTData.nft.image_url} alt={`nft ${openSeaSingleNFTData.nft.identifier} image`} />
             </div>
             <div className="nft-card-offer">
