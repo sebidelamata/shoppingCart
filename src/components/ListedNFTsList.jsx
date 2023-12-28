@@ -2,6 +2,8 @@ import { useState, useEffect } from "react"
 import fetchCollectionSlug from "../scripts/fetchCollectionSlug"
 import Loading from "./Loading"
 import PaginationRow from "./PaginationRow"
+import SingleListedNFTCard from "./SingleListedNFTCard"
+
 
 const ListedNFTsList = ({collection}) => {
     const ListedNFTsListColllection = (collection) => {
@@ -108,7 +110,7 @@ const ListedNFTsList = ({collection}) => {
                                     return (
                                                 <>
                                                 <li key={listing.order_hash} className='nfts-list-item'>
-                                                    {listing.protocol_data.parameters.offer[0].identifierOrCriteria}
+                                                    <SingleListedNFTCard listing={listing}/>
                                                 </li>
                                                 </>
                                     )
