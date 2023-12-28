@@ -25,13 +25,11 @@ const CustomRouter = () => {
             },
             {
               path: '/shop/collections/:collectionName',
-              element: <SingleCollection />,
-              children: [
-                {
-                  path: '/shop/collections/:collectionName/:nft',
-                  element: <NFTPage />
-                }
-              ]
+              element: <SingleCollection />
+            },
+            {
+              path: '/shop/collections/:collectionName/:nft',
+              element: <NFTPage />
             }
           ]
         },

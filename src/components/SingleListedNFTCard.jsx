@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Loading from "./Loading";
+import { Link } from "react-router-dom";
 
 const SingleListedNFTCard = ({listing}) => {
 
@@ -47,7 +48,7 @@ const SingleListedNFTCard = ({listing}) => {
         loading
     } = OpenSeaSingleNFT(listing)
 
-    console.log(listing)
+    console.log(openSeaSingleNFTData)
 
     if(error) return <p>A network error was encountered</p>
     if(loading) return <Loading/>
@@ -55,7 +56,7 @@ const SingleListedNFTCard = ({listing}) => {
     return(
         openSeaSingleNFTData &&
         listing.protocol_data.parameters &&
-        <>
+        <Link to={`/shop/collections/${openSeaSingleNFTData.nft.contract}/${openSeaSingleNFTData.nft.identifier}`}>
             <div className="single-listed-nft-card">
                 <strong>{openSeaSingleNFTData.nft.name}</strong>
             </div>
@@ -63,9 +64,9 @@ const SingleListedNFTCard = ({listing}) => {
                 <img className="nft-image" src={openSeaSingleNFTData.nft.image_url} alt={`nft ${openSeaSingleNFTData.nft.identifier} image`} />
             </div>
             <div className="nft-card-offer">
-                {`Offer: ${listing.price.current.value / (10 ** listing.price.current.decimals)} ${listing.price.current.currency}`}
+                {`Offer: ${(listing.price.current.value / (10 ** listing.price.current.decimals)).toFixed(4)} ${listing.price.current.currency}`}
             </div>
-        </>
+        </Link>
     )
 }
 

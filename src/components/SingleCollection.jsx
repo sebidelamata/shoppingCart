@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, Outlet, useLocation } from 'react-router-dom'
 import fetchCollectionSlug from '../scripts/fetchCollectionSlug.js'
 import Loading from './Loading.jsx'
 import VolumePlot from './VolumePlot.jsx'
