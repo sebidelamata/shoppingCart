@@ -94,6 +94,8 @@ const ListedNFTsList = ({collection}) => {
     let startCollectionIndex = (10 * currentpage)
     let endCollectionIndex = (10 * currentpage) + 9
 
+    const processedNames = new Set();
+
     return(
         <ul className='listed-nfts-list'>
             {
@@ -107,6 +109,13 @@ const ListedNFTsList = ({collection}) => {
                         <div className="listed-nft-cards-list">
                             {
                                 listedOpenSeaCollectionNFTs.slice(startCollectionIndex, endCollectionIndex).map((listing) => {
+                                    const itemName = listing.protocol_data.parameters.offer[0].identifierOrCriteria;
+                                    if(processedNames.has(itemName)){
+                                        return null
+                                    }
+                                    if (!processedNames.has(itemName)) {
+                                        processedNames.add(itemName);
+                                    }
                                     return (
                                                 listing &&
                                                 <li key={listing.order_hash} className='nfts-list-item'>
