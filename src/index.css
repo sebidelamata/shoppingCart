@@ -190,7 +190,9 @@ button:focus-visible {
 
 .collection-card,
 .trait-card,
-.traits-container{
+.traits-container,
+.rarity-container,
+.listings-container{
   display: grid;
   justify-content: center;
   align-items: center;
@@ -199,6 +201,10 @@ button:focus-visible {
   border-style: solid;
   border-color: white;
   padding: 0.5em;
+  box-shadow: 0 0 1.5em rgba(255, 255, 255, 50%);
+  gap: min(1em);
+  grid-template-rows: auto auto;
+  animation: zoom 0.5s ease-in-out;
 }
 
 .single-nft-card{
@@ -425,10 +431,11 @@ button:focus-visible {
   z-index: 0;
 }
 
-.collection-stats-list{
+.collection-stats-list,
+.listings-list{
   display: grid;
   list-style-type: none;
-  width: 100vw;
+  width: 96%;
   padding: 0;
   margin: 0;
   justify-content: center;
@@ -668,6 +675,7 @@ button:focus-visible {
   display: grid;
   gap: min(1em);
   box-shadow: 0 0 1.5em rgba(255, 255, 255, 50%);
+  animation: zoom 0.5s ease-in-out;
 }
 
 .traits-title{
@@ -686,6 +694,7 @@ button:focus-visible {
   gap: 1.5em;
   justify-content: center;
   align-items: center;
+  animation: zoom 0.5s ease-in-out;
 }
 
 .trait-card{
@@ -717,3 +726,22 @@ button:focus-visible {
   grid-template-rows: repeat(2, auto);
   gap: min(2em);
 }
+
+.rarity-title,
+.traits-title{
+  font-size: x-large;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.rarity-value{
+  font-size: large;
+  padding: min(1em);
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+

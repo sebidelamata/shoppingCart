@@ -3,6 +3,12 @@ import Loading from "./Loading"
 
 const NFTPageListings = ({openSeaSingleNFTData}) => {
 
+    const [showListings, setShowListings] = useState(false)
+
+    const handleListingsClick = () => {
+        setShowListings(!showListings)
+    }
+
     const handlePageLoad = (openSeaSingleNFTData) => {
         const [listingInfo, setListingInfo] = useState(null)
         const [listingInfoError, setListingInfoError] = useState(null)
@@ -78,8 +84,22 @@ const NFTPageListings = ({openSeaSingleNFTData}) => {
     if(listingInfoLoading) return <Loading/>
     console.log(listingInfo)
     return(
-        <div className="listings-container">
-            Listings
+        <div className="listings-container" onClick={() => handleListingsClick()}>
+            <div className="listings-title">Listings</div>
+            {
+                showListings === true &&
+                <ul className="listings-list">
+                    {
+                        listingInfo.map((listing) => {
+                            return(
+                                <li key={`listing-${listing.order_hash}`} className="listing">
+                                    {`${listing.current_price / (10 ** listing.taker_asset_bundle.assets[0].decimals).toFixed(4)} ETH`}
+                                </li>
+                            )
+                        })
+                    }
+                </ul>
+            }
         </div>
     )
 }

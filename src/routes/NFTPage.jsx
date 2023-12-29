@@ -14,8 +14,6 @@ const NFTPage = () => {
         setShowTraits(!showTraits)
     }
 
-    console.log(openSeaSingleNFTData)
-
     return(
         <div className="nft-page-body">
             <Link 
@@ -47,6 +45,16 @@ const NFTPage = () => {
                         }
                     </div>
                 }
+                {
+                    openSeaSingleNFTData.nft.rarity &&
+                    openSeaSingleNFTData.nft.rarity.rank &&
+                    <div className="rarity-container">
+                        <div className="rarity-title"><strong>Rarity</strong></div>
+                        <div className="rarity-value">
+                            #{openSeaSingleNFTData.nft.rarity.rank}
+                        </div>
+                    </div>
+                }
                 <div className="traits-container" onClick={() => handleTraitsClick()}>
                     <div className="traits-title">
                         <strong>Traits</strong>
@@ -55,9 +63,10 @@ const NFTPage = () => {
                         showTraits === true &&
                         <ul className="traits-list">
                             {
+                                openSeaSingleNFTData.nft.traits &&
                                 openSeaSingleNFTData.nft.traits.map((trait) => {
                                     return(
-                                        <li key={trait.trait_type} className="trait-card">
+                                        <li key={`${trait.trait_type}-${trait.value}`} className="trait-card">
                                             <div className="trait-title">
                                                 <strong>{trait.trait_type}</strong>
                                             </div>
@@ -68,9 +77,17 @@ const NFTPage = () => {
                                                 </div>
                                             }
                                             {
-                                                trait.trait_count &&
+                                                trait.trait_count === 0 &&
                                                 <div className="trait-count">
-                                                    {((trait.trait_count / collection.collection.totalSupply) * 100).toFixed(2)}%
+                                                    Unique
+                                                </div>
+                                            }
+                                            {
+                                                trait.trait_count !== 0 &&
+                                                <div className="trait-count">
+                                                    {
+                                                    `${((trait.trait_count / collection.collection.totalSupply) * 100).toFixed(2)}%`
+                                                    }
                                                 </div>
                                             }
                                         </li>
