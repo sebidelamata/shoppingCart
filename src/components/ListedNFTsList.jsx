@@ -89,8 +89,6 @@ const ListedNFTsList = ({collection}) => {
     if(listedOpenSeaCollectionNFTsError) return <p>A network error was encountered</p>
     if(listedOpenSeaCollectionNFTsLoading) return <Loading/>
 
-    console.log(listedOpenSeaCollectionNFTs)
-
     let startCollectionIndex = (10 * currentpage)
     let endCollectionIndex = (10 * currentpage) + 9
 

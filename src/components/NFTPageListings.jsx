@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import Loading from "./Loading"
+import ListingStopwatch from "./ListingStopwatch"
 
 const NFTPageListings = ({openSeaSingleNFTData}) => {
 
@@ -80,26 +81,67 @@ const NFTPageListings = ({openSeaSingleNFTData}) => {
         listingInfoLoading,
     } = handlePageLoad(openSeaSingleNFTData)
 
+    console.log(listingInfo)
+    console.log(Date.now() / 100)
+
     if(listingInfoError) return <p>A network error was encountered</p>
     if(listingInfoLoading) return <Loading/>
     return(
-        <div className="listings-container" onClick={() => handleListingsClick()}>
-            <div className="listings-title">Listings</div>
-            {
-                showListings === true &&
-                <ul className="listings-list">
-                    {
-                        listingInfo.map((listing) => {
-                            return(
-                                <li key={`listing-${listing.order_hash}`} className="listing">
-                                    {`${listing.current_price / (10 ** listing.taker_asset_bundle.assets[0].decimals).toFixed(4)} ETH`}
-                                </li>
-                            )
-                        })
-                    }
-                </ul>
-            }
-        </div>
+        <>
+            <div className="current-price-container">
+                <div className="current-price-label">
+                    Current Ask Price:
+                </div>
+                <div className="current-price">
+                    {`${(listingInfo.slice().reverse()[0].current_price / (10 ** listingInfo.slice().reverse()[0].taker_asset_bundle.assets[0].decimals)).toFixed(5)} ETH`}
+                </div>
+                <div className="expiration title">Expires In:</div>
+                <ListingStopwatch listingInfo={listingInfo}/>
+            </div>
+            <div className="listings-container" onClick={() => handleListingsClick()}>
+                <div className="listings-title"><strong>Listings</strong></div>
+                {
+                    showListings === true &&
+                    <>
+                    <div className="listing-headers">
+                        <div className="listing-price-label">
+                            Price
+                        </div>
+                        <div className="listing-expiration-label">
+                            Expiration
+                        </div>
+                        <div className="listing-creation-label">
+                            Created
+                        </div>
+                    </div>
+                    <ul className="listings-list">
+                        {
+                            listingInfo.slice().reverse().map((listing) => {
+                                const expiration = new Date(listing.expiration_time * 1000).toLocaleString()
+                                const creation = new Date(listing.listing_time * 1000).toLocaleString()
+                                console.log(expiration)
+                                return(
+                                    <li key={`listing-${listing.order_hash}`} className="listing">
+                                        <div className="listing-values">
+                                            <div className="listing-price">
+                                                {`${(listing.current_price / (10 ** listing.taker_asset_bundle.assets[0].decimals)).toFixed(4)} ETH`}
+                                            </div>
+                                            <div className="listing-expiration">
+                                                {expiration}
+                                            </div>
+                                            <div className="listing-creation">
+                                                {creation}
+                                            </div>
+                                        </div>
+                                    </li>
+                                )
+                            })
+                        }
+                    </ul>
+                    </>
+                }
+            </div>
+        </>
     )
 }
 

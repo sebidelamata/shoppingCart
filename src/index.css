@@ -744,4 +744,21 @@ button:focus-visible {
   text-align: center;
 }
 
+.listings-title{
+  font-size: x-large;
+  text-align: center;
+}
+
+.listing-headers{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  font-size: large;
+  gap: min(1em);
+}
+
+.listing-values{
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: min(1em);
+}
 
