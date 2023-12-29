@@ -188,7 +188,9 @@ button:focus-visible {
   align-items: center;
 }
 
-.collection-card{
+.collection-card,
+.trait-card,
+.traits-container{
   display: grid;
   justify-content: center;
   align-items: center;
@@ -470,12 +472,11 @@ button:focus-visible {
 
 @keyframes zoom {
   from {
-    transform: scale(0.8) scaleY(0) translateX(-20%);
-    transform: translateX(-20%);
+    transform: scale(0.4) translateX(-40%);
     opacity: 0;
   }
   to {
-    transform: scale(1) translateX(0) scaleY(1);
+    transform: scale(1) translateX(0);
     opacity: 1;
   }
 }
@@ -508,6 +509,7 @@ button:focus-visible {
   top: 24svh;
   display: grid;
   gap: min(3em);
+  animation: zoom 0.5s ease-in-out;
 }
 
 .collection-name{
@@ -660,4 +662,58 @@ button:focus-visible {
   font-size: xx-large;
   text-align: center;
   padding: min(0.5em);
+}
+
+.traits-container{
+  display: grid;
+  gap: min(1em);
+  box-shadow: 0 0 1.5em rgba(255, 255, 255, 50%);
+}
+
+.traits-title{
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.traits-list{
+  display: grid;
+  grid-template-columns: auto;
+  list-style-type: none;
+  padding: min(1em);
+  margin: 0;
+  gap: 1.5em;
+  justify-content: center;
+  align-items: center;
+}
+
+.trait-card{
+  display: grid;
+  grid-template-rows: repeat(2, auto);
+  gap: min(0.5em);
+  height: min-content;
+  padding: min(1em);
+  grid-template-areas: "traitTitle traitTitle"
+                       "traitValue traitCount";
+  box-shadow: 0 0 1.5em rgba(255, 255, 255, 50%);
+}
+
+.trait-title{
+  grid-area: traitTitle;
+}
+
+.trait-value{
+  grid-area: traitValue;
+}
+
+.trait-count{
+  grid-area: traitCount;
+  font-style: italic;
+}
+
+.image-and-info{
+  display: grid;
+  grid-template-rows: repeat(2, auto);
+  gap: min(2em);
 }
