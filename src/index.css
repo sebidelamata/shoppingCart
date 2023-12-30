@@ -192,7 +192,9 @@ button:focus-visible {
 .trait-card,
 .traits-container,
 .rarity-container,
-.listings-container{
+.listings-container,
+.current-price-and-expiration-container,
+.offers-container{
   display: grid;
   justify-content: center;
   align-items: center;
@@ -736,7 +738,7 @@ button:focus-visible {
 }
 
 .rarity-value{
-  font-size: large;
+  font-size: x-large;
   padding: min(1em);
   display: grid;
   justify-content: center;
@@ -762,3 +764,70 @@ button:focus-visible {
   gap: min(1em);
 }
 
+.stopwatch{
+  display: grid;
+  grid-template-rows: repeat(2, auto);
+}
+
+.stopwatch-labels,
+.stopwatch-values{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: min(1em);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: large;
+  font-weight: 700;
+}
+
+.current-price-and-expiration-container{
+  display: grid;
+  grid-template-rows: repeat(3, auto);
+  gap: min(1em);
+  padding: min(1em);
+}
+
+.expiration-title{
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  font-size: x-large;
+}
+
+.current-price-container{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: x-large;
+  font-weight: 900;
+  gap: min(1em);
+}
+
+.stopwatch-seconds{
+  color: rgb(255, 0, 255);
+}
+
+.add-to-cart-button-container{
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.add-to-cart-button{
+  background-color: rgb(0, 170, 255);
+  padding: min(1em);
+  padding-left: 10em;
+  padding-right: 10em;
+}
+
+.offer-container-title{
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: x-large;
+}

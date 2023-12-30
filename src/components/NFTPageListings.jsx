@@ -81,22 +81,26 @@ const NFTPageListings = ({openSeaSingleNFTData}) => {
         listingInfoLoading,
     } = handlePageLoad(openSeaSingleNFTData)
 
-    console.log(listingInfo)
-    console.log(Date.now() / 100)
-
     if(listingInfoError) return <p>A network error was encountered</p>
     if(listingInfoLoading) return <Loading/>
     return(
         <>
-            <div className="current-price-container">
-                <div className="current-price-label">
-                    Current Ask Price:
+            <div className="current-price-and-expiration-container">
+                <div className="current-price-container">
+                    <div className="current-price-label">
+                        Ask Price:
+                    </div>
+                    <div className="current-price">
+                        {`${(listingInfo.slice().reverse()[0].current_price / (10 ** listingInfo.slice().reverse()[0].taker_asset_bundle.assets[0].decimals)).toFixed(4)} ETH`}
+                    </div>
                 </div>
-                <div className="current-price">
-                    {`${(listingInfo.slice().reverse()[0].current_price / (10 ** listingInfo.slice().reverse()[0].taker_asset_bundle.assets[0].decimals)).toFixed(5)} ETH`}
+                <div className="expiration-container">
+                    <div className="expiration-title">Expires In:</div>
+                    <ListingStopwatch listingInfo={listingInfo}/>
                 </div>
-                <div className="expiration title">Expires In:</div>
-                <ListingStopwatch listingInfo={listingInfo}/>
+                <div className="add-to-cart-button-container">
+                    <button className="add-to-cart-button"><i className="fas fa-shopping-cart"></i></button>
+                </div>
             </div>
             <div className="listings-container" onClick={() => handleListingsClick()}>
                 <div className="listings-title"><strong>Listings</strong></div>

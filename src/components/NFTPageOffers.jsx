@@ -80,7 +80,7 @@ const NFTPageOffers = ({openSeaSingleNFTData}) => {
 
     return(
         <div className="offers-container">
-            Offers
+            <div className="offer-container-title"><strong>Offers</strong></div>
         </div>
     )
 

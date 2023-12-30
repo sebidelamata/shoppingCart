@@ -4,7 +4,6 @@ const ListingStopwatch = ({listingInfo}) => {
 
     const loadPage = () => {
         const timeRemaining = ((listingInfo.slice().reverse()[0].expiration_time * 100) - Math.floor(Date.now() / 10)) / 100
-        console.log(timeRemaining)
         const [timeLeft, setTimeLeft] = useState(timeRemaining)
 
         useEffect(() => {
@@ -20,10 +19,33 @@ const ListingStopwatch = ({listingInfo}) => {
     }
 
     const{timeLeft} = loadPage()
+    const days = Math.floor(timeLeft / (60 * 60 * 24));
+    const hours = Math.floor((timeLeft % (60 * 60 * 24)) / (60 * 60));
+    const minutes = Math.floor((timeLeft % (60 * 60)) / (60));
+    const seconds = (timeLeft % 60).toFixed(2);
 
     return(
-        <div>
-            {timeLeft.toFixed(2)}
+        <div className="stopwatch">
+            <div className="stopwatch-labels">
+                <div className="stopwatch-days-label"><strong>Days</strong></div>
+                <div className="stopwatch-hours-label"><strong>Hours</strong></div>
+                <div className="stopwatch-minutes-label"><strong>Minutes</strong></div>
+                <div className="stopwatch-seconds-label"><strong>Seconds</strong></div>
+            </div>
+            <div className="stopwatch-values">
+                <div className="stopwatch-days-label">
+                    {days}
+                </div>
+                <div className="stopwatch-hours">
+                    {hours}
+                </div>
+                <div className="stopwatch-minutes">
+                    {minutes}
+                </div>
+                <div className="stopwatch-seconds">
+                    {seconds}
+                </div>
+            </div>
         </div>
     )
 
