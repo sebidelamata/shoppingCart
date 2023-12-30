@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const ListingStopwatch = ({listingInfo}) => {
+const ListingStopwatch = ({listingInfo, handleCountdownZero}) => {
 
     const loadPage = () => {
         const timeRemaining = ((listingInfo.slice().reverse()[0].expiration_time * 100) - Math.floor(Date.now() / 10)) / 100
@@ -8,7 +8,14 @@ const ListingStopwatch = ({listingInfo}) => {
 
         useEffect(() => {
             const key = setInterval(() => {
-                setTimeLeft(count => count - 0.01)
+                setTimeLeft((count) => {
+                    if (count <= 0) {
+                        handleCountdownZero()
+                        clearInterval(key)
+                        return timeRemaining;
+                      }
+                    return count - 0.01
+                })
               }, 10);
             return () => {
             clearInterval(key);

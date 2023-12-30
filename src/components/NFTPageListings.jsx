@@ -5,10 +5,15 @@ import ListingStopwatch from "./ListingStopwatch"
 const NFTPageListings = ({openSeaSingleNFTData}) => {
 
     const [showListings, setShowListings] = useState(false)
+    const [countdownZero, setCountdownZero] = useState(false)
 
     const handleListingsClick = () => {
         setShowListings(!showListings)
     }
+
+    const handleCountdownZero = () => {
+        setCountdownZero(true);
+      };
 
     const handlePageLoad = (openSeaSingleNFTData) => {
         const [listingInfo, setListingInfo] = useState(null)
@@ -64,9 +69,13 @@ const NFTPageListings = ({openSeaSingleNFTData}) => {
                     setListingInfoLoading(false);
                 }
             };
+            if (countdownZero) {
+                handleFetches();
+                setCountdownZero(false); // Reset the state after triggering the fetch
+              }
         
             handleFetches();
-        }, []);
+        }, [countdownZero]);
 
         return {
             listingInfo,
@@ -96,7 +105,7 @@ const NFTPageListings = ({openSeaSingleNFTData}) => {
                 </div>
                 <div className="expiration-container">
                     <div className="expiration-title">Expires In:</div>
-                    <ListingStopwatch listingInfo={listingInfo}/>
+                    <ListingStopwatch listingInfo={listingInfo} handleCountdownZero={handleCountdownZero} />
                 </div>
                 <div className="add-to-cart-button-container">
                     <button className="add-to-cart-button"><i className="fas fa-shopping-cart"></i></button>
@@ -123,7 +132,6 @@ const NFTPageListings = ({openSeaSingleNFTData}) => {
                             listingInfo.slice().reverse().map((listing) => {
                                 const expiration = new Date(listing.expiration_time * 1000).toLocaleString()
                                 const creation = new Date(listing.listing_time * 1000).toLocaleString()
-                                console.log(expiration)
                                 return(
                                     <li key={`listing-${listing.order_hash}`} className="listing">
                                         <div className="listing-values">
