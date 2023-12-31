@@ -65,7 +65,7 @@ const SingleListedNFTCard = ({listing, collection}) => {
                 <strong>{openSeaSingleNFTData.nft.name}</strong>
             </div>
             <div className="nft-list-nft-image-container">
-                <img className="nft-image" src={openSeaSingleNFTData.nft.image_url} alt={`nft ${openSeaSingleNFTData.nft.identifier} image`} />
+                <img className="nft-image" src={openSeaSingleNFTData.nft.image_url} alt={`nft ${openSeaSingleNFTData.nft.identifier} image`} loading="lazy"/>
             </div>
             <div className="nft-card-offer">
                 {`Offer: ${(listing.price.current.value / (10 ** listing.price.current.decimals)).toFixed(4)} ${listing.price.current.currency}`}

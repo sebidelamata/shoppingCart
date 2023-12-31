@@ -1,11 +1,15 @@
 import { useState, useEffect } from "react"
 import Loading from "./Loading"
 import ListingStopwatch from "./ListingStopwatch"
+import { Link } from "react-router-dom"
+import { useShoppingCart } from '../scripts/ShoppingCartContext.jsx'
 
 const NFTPageListings = ({openSeaSingleNFTData}) => {
 
     const [showListings, setShowListings] = useState(false)
     const [countdownZero, setCountdownZero] = useState(false)
+
+    const { shoppingCart, addToCart } = useShoppingCart()
 
     const handleListingsClick = () => {
         setShowListings(!showListings)
@@ -94,65 +98,76 @@ const NFTPageListings = ({openSeaSingleNFTData}) => {
     if(listingInfoLoading) return <Loading/>
     return(
         <>
-            <div className="current-price-and-expiration-container">
-                <div className="current-price-container">
-                    <div className="current-price-label">
-                        Ask Price:
-                    </div>
-                    <div className="current-price">
-                        {`${(listingInfo.slice().reverse()[0].current_price / (10 ** listingInfo.slice().reverse()[0].taker_asset_bundle.assets[0].decimals)).toFixed(4)} ETH`}
-                    </div>
+            {
+                 Object.keys(listingInfo).length !== 0 &&
+                 <>
+                     <div className="current-price-and-expiration-container">
+                         <div className="current-price-container">
+                             <div className="current-price-label">
+                                 Ask Price:
+                             </div>
+                             <div className="current-price">
+                                 {`${(listingInfo.slice().reverse()[0].current_price / (10 ** listingInfo.slice().reverse()[0].taker_asset_bundle.assets[0].decimals)).toFixed(4)} ETH`}
+                             </div>
+                         </div>
+                         <div className="expiration-container">
+                             <div className="expiration-title">Expires In:</div>
+                             <ListingStopwatch listingInfo={listingInfo} handleCountdownZero={handleCountdownZero} />
+                         </div>
+                         <div className="add-to-cart-button-container">
+                             <button className="add-to-cart-button" onClick={() => addToCart(listingInfo)}><i className="fas fa-shopping-cart"></i></button>
+                         </div>
+                     </div>
+                     <div className="listings-container" onClick={() => handleListingsClick()}>
+                         <div className="listings-title"><strong>Listings</strong></div>
+                         {
+                             showListings === true &&
+                             <>
+                                 <div className="listing-headers">
+                                     <div className="listing-price-label">
+                                         Price
+                                     </div>
+                                     <div className="listing-expiration-label">
+                                         Expiration
+                                     </div>
+                                     <div className="listing-creation-label">
+                                         Created
+                                     </div>
+                                 </div>
+                                 <ul className="listings-list">
+                                     {
+                                         listingInfo.slice().reverse().map((listing) => {
+                                             const expiration = new Date(listing.expiration_time * 1000).toLocaleString()
+                                             const creation = new Date(listing.listing_time * 1000).toLocaleString()
+                                             return(
+                                                 <li key={`listing-${listing.order_hash}`} className="listing">
+                                                     <div className="listing-values">
+                                                         <div className="listing-price">
+                                                             {`${(listing.current_price / (10 ** listing.taker_asset_bundle.assets[0].decimals)).toFixed(4)} ETH`}
+                                                         </div>
+                                                         <div className="listing-expiration">
+                                                             {expiration}
+                                                         </div>
+                                                         <div className="listing-creation">
+                                                             {creation}
+                                                         </div>
+                                                     </div>
+                                                 </li>
+                                             )
+                                         })
+                                     }
+                                 </ul>
+                             </>
+                         }
+                     </div>
+                 </>
+            }
+            {
+                Object.keys(listingInfo).length === 0 &&
+                <div className="no-listings-container">
+                    <strong>No Current Listings</strong>
                 </div>
-                <div className="expiration-container">
-                    <div className="expiration-title">Expires In:</div>
-                    <ListingStopwatch listingInfo={listingInfo} handleCountdownZero={handleCountdownZero} />
-                </div>
-                <div className="add-to-cart-button-container">
-                    <button className="add-to-cart-button"><i className="fas fa-shopping-cart"></i></button>
-                </div>
-            </div>
-            <div className="listings-container" onClick={() => handleListingsClick()}>
-                <div className="listings-title"><strong>Listings</strong></div>
-                {
-                    showListings === true &&
-                    <>
-                    <div className="listing-headers">
-                        <div className="listing-price-label">
-                            Price
-                        </div>
-                        <div className="listing-expiration-label">
-                            Expiration
-                        </div>
-                        <div className="listing-creation-label">
-                            Created
-                        </div>
-                    </div>
-                    <ul className="listings-list">
-                        {
-                            listingInfo.slice().reverse().map((listing) => {
-                                const expiration = new Date(listing.expiration_time * 1000).toLocaleString()
-                                const creation = new Date(listing.listing_time * 1000).toLocaleString()
-                                return(
-                                    <li key={`listing-${listing.order_hash}`} className="listing">
-                                        <div className="listing-values">
-                                            <div className="listing-price">
-                                                {`${(listing.current_price / (10 ** listing.taker_asset_bundle.assets[0].decimals)).toFixed(4)} ETH`}
-                                            </div>
-                                            <div className="listing-expiration">
-                                                {expiration}
-                                            </div>
-                                            <div className="listing-creation">
-                                                {creation}
-                                            </div>
-                                        </div>
-                                    </li>
-                                )
-                            })
-                        }
-                    </ul>
-                    </>
-                }
-            </div>
+            }
         </>
     )
 }

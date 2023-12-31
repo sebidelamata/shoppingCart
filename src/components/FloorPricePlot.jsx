@@ -64,6 +64,7 @@ const FloorPricePlot = ({floorPriceData}) => {
         title: 'Floor Price',
         xaxis: { title: 'Day' },
         yaxis: { title: 'Floor Price (ETH)' },
+        responsive: true,
         plot_bgcolor: '#242424',
         paper_bgcolor: '#242424',
         font: { color: 'white' }, 

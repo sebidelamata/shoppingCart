@@ -64,6 +64,7 @@ const VolumePlot = ({volumeData}) => {
         title: 'Daily Volume',
         xaxis: { title: 'Day' },
         yaxis: { title: 'Daily Volume (ETH)' },
+        responsive: true,
         plot_bgcolor: '#242424',
         paper_bgcolor: '#242424',
         font: { color: 'white' }, 

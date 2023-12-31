@@ -2,35 +2,44 @@ import { useState, useEffect } from "react";
 
 const OfferStopwatch = ({offerInfo, handleCountdownZero}) => {
 
-    // console.log((offerInfo.protocol_data.parameters.endTime / 1000) - (Math.floor(Date.now()) / 1000))
-    console.log(offerInfo.protocol_data.parameters.endTime)
-    console.log(Math.floor(Date.now()))
-
     const calculateTimeRemaining = (offerInfo) => {
         let timeRemaining = ((offerInfo.protocol_data.parameters.endTime) - (Math.floor(Date.now()) / 1000))
         if(timeRemaining < 0){
-            calculateTimeRemaining(offerInfo)
+            setInterval(() => {}, 100)
+            timeRemaining = ((offerInfo.protocol_data.parameters.endTime) - (Math.floor(Date.now()) / 1000))
         }
         return timeRemaining
     }
 
-    const [offerTimeLeft, setofferTimeLeft] = useState(calculateTimeRemaining(offerInfo))
+    const [offerTimeLeft, setOfferTimeLeft] = useState(calculateTimeRemaining(offerInfo))
 
     useEffect(() => {
+        const updateOfferTimeLeft = () => {
+            setOfferTimeLeft(calculateTimeRemaining(offerInfo));
+          };
         const key = setInterval(() => {
-            setofferTimeLeft((count) => {
+            setOfferTimeLeft((count) => {
                 if (count <= 0) {
                     handleCountdownZero()
                     clearInterval(key)
+                    clearInterval(minuteRun)
                     return calculateTimeRemaining(offerInfo);
                   }
                 return count - 0.01
             })
           }, 10);
+
+        const minuteRun = setInterval(() => {
+            console.log('run')
+            handleCountdownZero()
+            updateOfferTimeLeft()
+        }, 60000)
+
         return () => {
         clearInterval(key);
+        clearInterval(minuteRun)
         };
-    },[handleCountdownZero, calculateTimeRemaining])
+    },[handleCountdownZero, offerInfo])
 
     const days = Math.floor(offerTimeLeft / (60 * 60 * 24));
     const hours = Math.floor((offerTimeLeft % (60 * 60 * 24)) / (60 * 60));

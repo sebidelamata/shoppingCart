@@ -63,7 +63,7 @@ const SingleNFTCard = ({nft, collection}) => {
                 nft.image_url &&
                 (
                     <div className="nft-image-container">
-                        <img className="nft-image" src={nft.image_url} alt={`nft ${nft.identifier} image`} />
+                        <img className="nft-image" src={nft.image_url} alt={`nft ${nft.identifier} image`} loading="lazy"/>
                     </div>
                 )
             }

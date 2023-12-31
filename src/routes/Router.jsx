@@ -7,8 +7,13 @@ import AllCollections from '../components/AllCollections.jsx'
 import Docs from './Docs.jsx'
 import SingleCollection from '../components/SingleCollection.jsx'
 import NFTPage from './NFTPage.jsx'
+import { useState } from "react";
 
 const CustomRouter = () => {
+
+  // shopping cart
+  const [shoppingCart, setShoppingCart] = useState([])
+
     const router = createBrowserRouter([
         {
           path: '/',
@@ -29,13 +34,13 @@ const CustomRouter = () => {
             },
             {
               path: '/shop/collections/:collectionName/:nft',
-              element: <NFTPage />
+              element: <NFTPage setShoppingCart={setShoppingCart} shoppingCart={shoppingCart}/>
             }
           ]
         },
         {
           path: '/checkout',
-          element: <Checkout />
+          element: <Checkout setShoppingCart={setShoppingCart} shoppingCart={shoppingCart}/>
         },
         {
           path: '/docs',

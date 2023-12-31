@@ -33,7 +33,7 @@ const NFTPage = () => {
                         <div className="nft-page-nft-name">
                             <strong>{openSeaSingleNFTData.nft.name || `${collection.collection.name} #${openSeaSingleNFTData.nft.identifier}`}</strong>
                         </div>
-                        <img className="nft-page-nft-image" src={openSeaSingleNFTData.nft.image_url} alt="NFT Image" />
+                        <img className="nft-page-nft-image" src={openSeaSingleNFTData.nft.image_url} alt="NFT Image" loading="lazy"/>
                         {
                             openSeaSingleNFTData &&
                             openSeaSingleNFTData.nft.owners &&

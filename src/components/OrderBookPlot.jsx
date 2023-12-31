@@ -61,6 +61,7 @@ const OrderBookPlot = ({orderBookData}) => {
       title: 'Order Book',
         xaxis: { title: 'Price (ETH)' },
         yaxis: { title: 'Quantity (NFTs)' },
+        responsive: true,
         plot_bgcolor: '#242424',
         paper_bgcolor: '#242424',
         font: { color: 'white' }, 

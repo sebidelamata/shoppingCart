@@ -63,6 +63,7 @@ const SalesHistoryPlot = ({salesHistoryData}) => {
         title: 'Sales History',
         xaxis: { title: 'Day' },
         yaxis: { title: 'Sale Price (ETH)' },
+        responsive: true,
         plot_bgcolor: '#242424',
         paper_bgcolor: '#242424',
         font: { color: 'white' }, 

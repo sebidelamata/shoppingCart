@@ -194,7 +194,8 @@ button:focus-visible {
 .rarity-container,
 .listings-container,
 .current-price-and-expiration-container,
-.offers-container{
+.offers-container,
+.no-listings-container{
   display: grid;
   justify-content: center;
   align-items: center;
@@ -751,17 +752,24 @@ button:focus-visible {
   text-align: center;
 }
 
-.listing-headers{
+.listing-headers,
+.offer-headers{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  font-size: large;
   gap: min(1em);
+  text-align: left;
+  font-size: x-large;
 }
 
 .listing-values{
   display: grid;
-  grid-template-columns: repeat(3,1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: min(1em);
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+  font-size: large;
+  font-weight: 900;
 }
 
 .stopwatch{
@@ -810,14 +818,16 @@ button:focus-visible {
   color: rgb(255, 0, 255);
 }
 
-.add-to-cart-button-container{
+.add-to-cart-button-container,
+.make-offer-button-container{
   display: grid;
   justify-content: center;
   align-items: center;
   width: 100%;
 }
 
-.add-to-cart-button{
+.add-to-cart-button,
+.make-offer-button{
   background-color: rgb(0, 170, 255);
   padding: min(1em);
   padding-left: 10em;
@@ -830,4 +840,30 @@ button:focus-visible {
   align-items: center;
   text-align: center;
   font-size: x-large;
+}
+
+.offer-values{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: min(1em);
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+  font-size: large;
+  font-weight: 900;
+}
+
+.offerer-address{
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: large;
+  font-weight: 900;
+}
+
+.make-offer-button-container{
+  display: grid;
+  justify-content: center;
+  align-items: center;
 }

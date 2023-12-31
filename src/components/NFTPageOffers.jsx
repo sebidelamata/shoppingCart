@@ -1,18 +1,21 @@
 import { useState, useEffect } from "react"
 import Loading from "./Loading"
 import OfferStopwatch from "./OfferStopwatch"
+import { Link } from "react-router-dom"
 
 const NFTPageOffers = ({openSeaSingleNFTData}) => {
 
     const [showOffers, setShowOffers] = useState(false)
     const [countdownOfferZero, setCountdownOfferZero] = useState(false)
 
-    console.log(openSeaSingleNFTData)
     const handleCountdownZero = () => {
-        setCountdownOfferZero(true);
+        setCountdownOfferZero(true)
       };
 
-    const handleOffersClick = () => {
+    const handleOffersClick = (e) => {
+        if (e.target.classList.contains('make-offer-button')) {
+            return
+        }
         setShowOffers(!showOffers)
     }
 
@@ -43,7 +46,6 @@ const NFTPageOffers = ({openSeaSingleNFTData}) => {
                     }
                     
                     const data = await response.json();
-                    console.log(data)
                     bestOffer = data
             } catch(error){
                 setOfferInfoError(error.message)
@@ -67,7 +69,10 @@ const NFTPageOffers = ({openSeaSingleNFTData}) => {
             };
         
             handleFetches();
-        }, []);
+            return () => {
+                setCountdownOfferZero(false)
+            }
+        }, [countdownOfferZero]);
 
         return {
             offerInfo,
@@ -84,17 +89,23 @@ const NFTPageOffers = ({openSeaSingleNFTData}) => {
 
     if(offerInfoError) return <p>A network error was encountered</p>
     if(offerInfoLoading) return <Loading/>
-    console.log(offerInfo)
-    const expiration = new Date(offerInfo.protocol_data.parameters.endTime * 1000).toLocaleString()
-    const creation = new Date(offerInfo.protocol_data.parameters.startTime * 1000).toLocaleString()
+    let expiration, creation
+    if(Object.keys(offerInfo).length !== 0){
+        expiration = new Date(offerInfo.protocol_data.parameters.endTime * 1000).toLocaleString()
+        creation = new Date(offerInfo.protocol_data.parameters.startTime * 1000).toLocaleString()
+    }
 
     return(
-            <div className="offers-container" onClick={() => handleOffersClick()}>
+            <div className="offers-container" onClick={(e) => handleOffersClick(e)}>
                 <div className="offer-container-title"><strong>Best Offer</strong></div>
                 {
                     showOffers === true &&
+                    Object.keys(offerInfo).length !== 0 &&
                     <>
-                        <OfferStopwatch offerInfo={offerInfo} handleCountdownZero={handleCountdownZero}/>
+                        <div className="expiration-container">
+                        <div className="expiration-title">Expires In:</div>
+                            <OfferStopwatch offerInfo={offerInfo} handleCountdownZero={handleCountdownZero} />
+                        </div>
                         <div className="offer-headers">
                             <div className="offer-price-label">
                                 Price
@@ -117,7 +128,22 @@ const NFTPageOffers = ({openSeaSingleNFTData}) => {
                                 {creation}
                             </div>
                         </div>
+                        <Link className="offerer-address" to={`https://etherscan.io/address/${offerInfo.protocol_data.parameters.offerer}`} target="_blank">
+                            <button>Offerer</button>
+                        </Link>
+                        <div className="make-offer-button-container">
+                            <button className="make-offer-button" onClick={() => console.log('make offer')}>
+                                Make Offer
+                            </button>
+                        </div>
                     </>
+                }
+                {
+                    showOffers === true &&
+                    Object.keys(offerInfo).length === 0 &&
+                    <div className="no-offers-container">
+                        <strong>No Current Offers</strong>
+                    </div>
                 }
         </div>
     )

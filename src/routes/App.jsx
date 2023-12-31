@@ -8,9 +8,7 @@ import { arbitrum, mainnet } from 'viem/chains'
 function App() {
 
   // Wallet Connect Stuff
-  // 1. Get projectId at https://cloud.walletconnect.com
   const projectId = import.meta.env.VITE_WALLET_CONNECT_PROJECT_ID
-  // 2. Create wagmiConfig
   const metadata = {
     name: 'Web3Modal',
     description: 'Web3Modal Example',
@@ -20,7 +18,6 @@ function App() {
   
   const chains = [mainnet, arbitrum]
   const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata })
-  // 3. Create modal
   createWeb3Modal({ wagmiConfig, projectId, chains })
 
   return (

@@ -1,8 +1,12 @@
 import { useState } from 'react'
 import Navbar from '../components/Navbar'
+import { useShoppingCart } from '../scripts/ShoppingCartContext.jsx'
 
 function Checkout() {
-  const [count, setCount] = useState(0)
+
+  const { shoppingCart, addToCart } = useShoppingCart()
+
+  console.log(shoppingCart)
 
   return (
     <>
