@@ -9,10 +9,8 @@ GapingPond is a white glove analytics service. GapingPond uses DeFiLlamma and Op
 To install and run in a local Dev environment:
 
 <pre>
-```bash
 npm install
 npm run dev
-```
 </pre>
 
 Then navigate to port 5037 and you're sailing...
