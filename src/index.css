@@ -849,6 +849,11 @@ button:focus-visible {
   padding-right: 10em;
 }
 
+.add-to-cart-button.inactive{
+  background-color: #a8aeb6;
+  pointer-events: none;
+}
+
 .offer-container-title{
   display: grid;
   justify-content: center;
@@ -885,7 +890,7 @@ button:focus-visible {
 
 
 .checkout-modal-backdrop{
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   display: grid;
@@ -895,6 +900,7 @@ button:focus-visible {
   z-index: 5;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
 .checkout-modal-container{
@@ -912,7 +918,9 @@ button:focus-visible {
   gap: min(1em);
   animation: zoom 0.5s ease-in-out;
   position: absolute;
-  top: 5%;
+  top: 50%; /* Set top to 50% */
+  left: 50%; /* Set left to 50% */
+  transform: translate(-50%, -50%);
 }
 
 .checkout-modal-title{

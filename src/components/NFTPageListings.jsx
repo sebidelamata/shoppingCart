@@ -12,6 +12,21 @@ const NFTPageListings = ({openSeaSingleNFTData, collection}) => {
 
     const { shoppingCart, addToCart } = useShoppingCart()
 
+    const [isInCart, setIsInCart] = useState(false)
+    const checkIsInCart = () => {
+        const inputToken = openSeaSingleNFTData.nft.contract.toUpperCase()
+        const inputIdentifier = openSeaSingleNFTData.nft.identifier.toUpperCase()
+        const containsToken = shoppingCart.some(obj => obj[0].protocol_data.parameters.offer[0].token.toUpperCase() == inputToken)
+        const containsIdentifier = shoppingCart.some(obj => obj[0].protocol_data.parameters.offer[0].identifierOrCriteria.toUpperCase() == inputIdentifier)
+        const isUnique = !(containsToken && containsIdentifier)
+        if(isUnique === false){
+            setIsInCart(true)
+        }
+    }
+    useEffect(() => {
+        checkIsInCart()
+    }, [shoppingCart])
+
     const handleListingsClick = () => {
         setShowListings(!showListings)
     }
@@ -29,15 +44,15 @@ const NFTPageListings = ({openSeaSingleNFTData, collection}) => {
     }
 
     const handleAddToCartClick = (listingInfo) => {
-        addToCart(listingInfo)
         handleShowCheckoutModalClick()
+        addToCart(listingInfo)
     }
 
     const handlePageLoad = (openSeaSingleNFTData) => {
         const [listingInfo, setListingInfo] = useState(null)
         const [listingInfoError, setListingInfoError] = useState(null)
         const [listingInfoLoading, setListingInfoLoading] = useState(true)
-        console.log(collection)
+        console.log(isInCart)
 
         const fetchListingInfo = async (openSeaSingleNFTData) => {
 
@@ -111,6 +126,7 @@ const NFTPageListings = ({openSeaSingleNFTData, collection}) => {
 
     if(listingInfoError) return <p>A network error was encountered</p>
     if(listingInfoLoading) return <Loading/>
+    console.log(listingInfo)
     return(
         <>
             {
@@ -124,8 +140,8 @@ const NFTPageListings = ({openSeaSingleNFTData, collection}) => {
                              <div className="current-price">
                                  {
                                     (listingInfo.slice().reverse()[0].current_price / (10 ** listingInfo.slice().reverse()[0].taker_asset_bundle.assets[0].decimals)).toFixed(4).length > 15
-                                    ? (listingInfo.slice().reverse()[0].current_price / (10 ** listingInfo.slice().reverse()[0].taker_asset_bundle.assets[0].decimals)).toFixed(0)
-                                    : (listingInfo.slice().reverse()[0].current_price / (10 ** listingInfo.slice().reverse()[0].taker_asset_bundle.assets[0].decimals)).toFixed(4)
+                                    ? `${(listingInfo.slice().reverse()[0].current_price / (10 ** listingInfo.slice().reverse()[0].taker_asset_bundle.assets[0].decimals)).toFixed(0)} ${listingInfo.slice().reverse()[0].taker_asset_bundle.assets[0].name}`
+                                    : `${(listingInfo.slice().reverse()[0].current_price / (10 ** listingInfo.slice().reverse()[0].taker_asset_bundle.assets[0].decimals)).toFixed(4)} ${listingInfo.slice().reverse()[0].taker_asset_bundle.assets[0].name}`
                                  }
                              </div>
                          </div>
@@ -134,7 +150,7 @@ const NFTPageListings = ({openSeaSingleNFTData, collection}) => {
                              <ListingStopwatch listingInfo={listingInfo} handleCountdownZero={handleCountdownZero} />
                          </div>
                          <div className="add-to-cart-button-container">
-                             <button className="add-to-cart-button" onClick={() => handleAddToCartClick(listingInfo)}><i className="fas fa-shopping-cart"></i></button>
+                             <button className={isInCart === false ? `add-to-cart-button` : `add-to-cart-button inactive`} onClick={() => handleAddToCartClick(listingInfo)}><i className="fas fa-shopping-cart"></i></button>
                          </div>
                      </div>
                      <div className="listings-container" onClick={() => handleListingsClick()}>
@@ -162,7 +178,7 @@ const NFTPageListings = ({openSeaSingleNFTData, collection}) => {
                                                  <li key={`listing-${listing.order_hash}`} className="listing">
                                                      <div className="listing-values">
                                                          <div className="listing-price">
-                                                             {`${(listing.current_price / (10 ** listing.taker_asset_bundle.assets[0].decimals)).toFixed(4)} ETH`}
+                                                             {`${(listing.current_price / (10 ** listing.taker_asset_bundle.assets[0].decimals)).toFixed(4)} ${listing.taker_asset_bundle.assets[0].name}`}
                                                          </div>
                                                          <div className="listing-expiration">
                                                              {expiration}
