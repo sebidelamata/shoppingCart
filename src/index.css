@@ -158,6 +158,12 @@ button:focus-visible {
   top: 8svh;
 }
 
+.outlet-card,
+.back-link{
+  display: grid;
+  width: 100vw;
+}
+
 .all-collections-list,
 .nft-cards-list,
 .nfts-list,
@@ -520,6 +526,7 @@ button:focus-visible {
   display: grid;
   gap: min(3em);
   animation: zoom 0.5s ease-in-out;
+  width: 100vw;
 }
 
 .collection-name{
@@ -728,6 +735,7 @@ button:focus-visible {
   display: grid;
   grid-template-rows: repeat(2, auto);
   gap: min(2em);
+  width: 98vw;
 }
 
 .rarity-title,
@@ -793,7 +801,14 @@ button:focus-visible {
   display: grid;
   grid-template-rows: repeat(3, auto);
   gap: min(1em);
-  padding: min(1em);
+  padding: 0;
+  width: 98vw;
+  padding-bottom: min(1em);
+}
+
+.current-price{
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .expiration-title{
@@ -805,13 +820,13 @@ button:focus-visible {
 
 .current-price-container{
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, auto);
   justify-content: center;
   align-items: center;
   text-align: center;
   font-size: x-large;
   font-weight: 900;
-  gap: min(1em);
+  gap: min(0.2em);
 }
 
 .stopwatch-seconds{
@@ -867,3 +882,60 @@ button:focus-visible {
   justify-content: center;
   align-items: center;
 }
+
+
+.checkout-modal-backdrop{
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  height: 100svh;
+  width: 100vw;
+  background-color: #242424;
+  z-index: 5;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkout-modal-container{
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-rows: repeat(3, auto);
+  max-width: 98vw;
+  border-radius: 1.5em;
+  border-width: 2px;
+  border-style: solid;
+  border-color: white;
+  padding: 0.5em;
+  box-shadow: 0 0 1.5em rgba(255, 255, 255, 50%);
+  gap: min(1em);
+  animation: zoom 0.5s ease-in-out;
+  position: absolute;
+  top: 5%;
+}
+
+.checkout-modal-title{
+  display: grid;
+  font-size: x-large;
+  font-weight: 900;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.checkout-modal-image-container{
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkout-modal-image{
+  display: grid;
+  object-fit: contain;
+  height: 10em;
+  border-radius: 1.5em;
+  align-items: center;
+  justify-content: center;
+}
+

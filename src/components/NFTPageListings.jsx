@@ -4,10 +4,11 @@ import ListingStopwatch from "./ListingStopwatch"
 import { Link } from "react-router-dom"
 import { useShoppingCart } from '../scripts/ShoppingCartContext.jsx'
 
-const NFTPageListings = ({openSeaSingleNFTData}) => {
+const NFTPageListings = ({openSeaSingleNFTData, collection}) => {
 
     const [showListings, setShowListings] = useState(false)
     const [countdownZero, setCountdownZero] = useState(false)
+    const [showCheckoutModal, setShowCheckoutModal] = useState(false)
 
     const { shoppingCart, addToCart } = useShoppingCart()
 
@@ -16,13 +17,27 @@ const NFTPageListings = ({openSeaSingleNFTData}) => {
     }
 
     const handleCountdownZero = () => {
-        setCountdownZero(true);
-      };
+        setCountdownZero(true)
+      }
+    
+    const handleShowCheckoutModalClick = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+          })
+        setShowCheckoutModal(!showCheckoutModal)
+    }
+
+    const handleAddToCartClick = (listingInfo) => {
+        addToCart(listingInfo)
+        handleShowCheckoutModalClick()
+    }
 
     const handlePageLoad = (openSeaSingleNFTData) => {
         const [listingInfo, setListingInfo] = useState(null)
         const [listingInfoError, setListingInfoError] = useState(null)
         const [listingInfoLoading, setListingInfoLoading] = useState(true)
+        console.log(collection)
 
         const fetchListingInfo = async (openSeaSingleNFTData) => {
 
@@ -107,7 +122,11 @@ const NFTPageListings = ({openSeaSingleNFTData}) => {
                                  Ask Price:
                              </div>
                              <div className="current-price">
-                                 {`${(listingInfo.slice().reverse()[0].current_price / (10 ** listingInfo.slice().reverse()[0].taker_asset_bundle.assets[0].decimals)).toFixed(4)} ETH`}
+                                 {
+                                    (listingInfo.slice().reverse()[0].current_price / (10 ** listingInfo.slice().reverse()[0].taker_asset_bundle.assets[0].decimals)).toFixed(4).length > 15
+                                    ? (listingInfo.slice().reverse()[0].current_price / (10 ** listingInfo.slice().reverse()[0].taker_asset_bundle.assets[0].decimals)).toFixed(0)
+                                    : (listingInfo.slice().reverse()[0].current_price / (10 ** listingInfo.slice().reverse()[0].taker_asset_bundle.assets[0].decimals)).toFixed(4)
+                                 }
                              </div>
                          </div>
                          <div className="expiration-container">
@@ -115,7 +134,7 @@ const NFTPageListings = ({openSeaSingleNFTData}) => {
                              <ListingStopwatch listingInfo={listingInfo} handleCountdownZero={handleCountdownZero} />
                          </div>
                          <div className="add-to-cart-button-container">
-                             <button className="add-to-cart-button" onClick={() => addToCart(listingInfo)}><i className="fas fa-shopping-cart"></i></button>
+                             <button className="add-to-cart-button" onClick={() => handleAddToCartClick(listingInfo)}><i className="fas fa-shopping-cart"></i></button>
                          </div>
                      </div>
                      <div className="listings-container" onClick={() => handleListingsClick()}>
@@ -166,6 +185,27 @@ const NFTPageListings = ({openSeaSingleNFTData}) => {
                 Object.keys(listingInfo).length === 0 &&
                 <div className="no-listings-container">
                     <strong>No Current Listings</strong>
+                </div>
+            }
+            {
+                showCheckoutModal === true &&
+                <div className="checkout-modal-backdrop">
+                    <div className="checkout-modal-container">
+                        <div className="checkout-modal-title">
+                            {`${collection.collection.name} #${openSeaSingleNFTData.nft.identifier} Added to Cart!`}
+                        </div>
+                        <div className="checkout-modal-image-container">
+                            <img src={openSeaSingleNFTData.nft.image_url} alt="NFT Image" loading="lazy" className="checkout-modal-image"/>
+                        </div>
+                        <div className="buttons container">
+                            <Link to={'/checkout'} onClick={() => handleShowCheckoutModalClick()}>
+                                <button>Proceed to Checkout</button>
+                            </Link>
+                            <Link to={'/shop'} onClick={() => handleShowCheckoutModalClick()}>
+                                <button>Keep Shopping</button>
+                            </Link>
+                        </div>
+                    </div>
                 </div>
             }
         </>

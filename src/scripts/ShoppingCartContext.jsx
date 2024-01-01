@@ -14,8 +14,14 @@ const ShoppingCartProvider = ({ children }) => {
     const [shoppingCart, setShoppingCart] = useState([]);
   
     const addToCart = (item) => {
-      console.log('click')
-      setShoppingCart((prevCart) => [...prevCart, item]);
+      const inputToken = item[0].protocol_data.parameters.offer[0].token
+      const inputIdentifier = item[0].protocol_data.parameters.offer[0].identifierOrCriteria
+      const containsToken = shoppingCart.some(obj => obj[0].protocol_data.parameters.offer[0].token === inputToken)
+      const containsIdentifier = shoppingCart.some(obj => obj[0].protocol_data.parameters.offer[0].identifierOrCriteria === inputIdentifier)
+      const isUnique = !(containsToken && containsIdentifier)
+      if(isUnique === true){
+        setShoppingCart((prevCart) => [...prevCart, item]);
+      }
     }
 
     return(

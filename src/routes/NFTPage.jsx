@@ -98,7 +98,7 @@ const NFTPage = () => {
                     }
                 </div>
             </div>
-            <NFTPageListings openSeaSingleNFTData={openSeaSingleNFTData}/>
+            <NFTPageListings openSeaSingleNFTData={openSeaSingleNFTData} collection={collection}/>
             <NFTPageOffers openSeaSingleNFTData={openSeaSingleNFTData}/>
         </div>
     )
