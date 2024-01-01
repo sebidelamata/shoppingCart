@@ -901,6 +901,7 @@ button:focus-visible {
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  animation: zoom 0.5s ease-in-out;
 }
 
 .checkout-modal-container{
@@ -947,3 +948,9 @@ button:focus-visible {
   justify-content: center;
 }
 
+.buttons-container{
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  justify-content: center;
+  align-items: center;
+}

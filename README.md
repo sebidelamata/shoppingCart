@@ -1,8 +1,18 @@
-# React + Vite
+# GapingPond - A NFT Marketplace
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![GapingPond Paper Boat Loago](/public/Paperboat.svg)
 
-Currently, two official plugins are available:
+GapingPond is a whitelabel NFT Marketplace Service that sits (floats) on top of OpenSea.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+GapingPond is a white glove analytics service. GapingPond uses DeFiLlamma and OpenSea APIs to filter NFTs to the top 1000 by volume on Ethereum network. GapingPond provides analytics and charts currently unavailable on OpenSea alone, as well as interactive charts.
+
+To install and run in a local Dev environment:
+
+<pre>
+```bash
+npm install
+npm run dev
+```
+</pre>
+
+Then navigate to port 5037 and you're sailing...

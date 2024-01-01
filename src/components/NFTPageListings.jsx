@@ -213,7 +213,7 @@ const NFTPageListings = ({openSeaSingleNFTData, collection}) => {
                         <div className="checkout-modal-image-container">
                             <img src={openSeaSingleNFTData.nft.image_url} alt="NFT Image" loading="lazy" className="checkout-modal-image"/>
                         </div>
-                        <div className="buttons container">
+                        <div className="buttons-container">
                             <Link to={'/checkout'} onClick={() => handleShowCheckoutModalClick()}>
                                 <button>Proceed to Checkout</button>
                             </Link>
