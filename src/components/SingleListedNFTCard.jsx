@@ -55,8 +55,6 @@ const SingleListedNFTCard = ({listing, collection}) => {
           })
     }
 
-    console.log(openSeaSingleNFTData)
-
     if(error) return <p>A network error was encountered</p>
     if(loading) return <Loading/>
 

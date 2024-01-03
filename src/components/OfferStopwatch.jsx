@@ -30,7 +30,6 @@ const OfferStopwatch = ({offerInfo, handleCountdownZero}) => {
           }, 10);
 
         const minuteRun = setInterval(() => {
-            console.log('run')
             handleCountdownZero()
             updateOfferTimeLeft()
         }, 60000)

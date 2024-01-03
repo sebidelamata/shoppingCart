@@ -6,7 +6,6 @@ const CheckoutListItem = ({item}) => {
 
     const { shoppingCart, addToCart, removeFromCart } = useShoppingCart()
 
-    console.log(item)
     return(
         <div className="checkout-list-item">
             <div className="item-name">

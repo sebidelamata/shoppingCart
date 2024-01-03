@@ -22,7 +22,6 @@ const SingleNFTCard = ({nft, collection}) => {
             const url = `https://api.opensea.io/api/v2/chain/ethereum/contract/${nft.contract}/nfts/${nft.identifier}`;
             try{
                 const response = await fetch(url, options);
-              console.log(response)
                   if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                   }
@@ -47,7 +46,7 @@ const SingleNFTCard = ({nft, collection}) => {
 
     if(error) return <p>A network error was encountered</p>
     if(loading) return <Loading/>
-    console.log(openSeaSingleNFTData)
+    
     const handlePageScroll = () => {
         window.scrollTo({
             top: 0,

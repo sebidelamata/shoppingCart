@@ -315,9 +315,6 @@ const SingleCollection = () => {
     if(error) return <p>A network error was encountered</p>
     if(loading) return <Loading/>
 
-    
-    //console.log(nftLlamaCollectionData)
-
     const handleVolumeClick = () => {
         setShowVolumeData(!showVolumeData)
     }

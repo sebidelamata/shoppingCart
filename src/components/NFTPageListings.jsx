@@ -52,7 +52,6 @@ const NFTPageListings = ({openSeaSingleNFTData, collection}) => {
         const [listingInfo, setListingInfo] = useState(null)
         const [listingInfoError, setListingInfoError] = useState(null)
         const [listingInfoLoading, setListingInfoLoading] = useState(true)
-        console.log(isInCart)
 
         const fetchListingInfo = async (openSeaSingleNFTData) => {
 
@@ -126,7 +125,7 @@ const NFTPageListings = ({openSeaSingleNFTData, collection}) => {
 
     if(listingInfoError) return <p>A network error was encountered</p>
     if(listingInfoLoading) return <Loading/>
-    console.log(listingInfo)
+    
     return(
         <>
             {
