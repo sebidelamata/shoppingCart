@@ -42,7 +42,7 @@ h1 {
   padding-top: 2svh;
   margin: 0;
   -webkit-text-stroke: 0.015em black;
-  text-stroke: 0.015em black;
+  text-stroke: 1px black;
   z-index: 2;
 }
 
@@ -94,6 +94,8 @@ button:focus-visible {
   width: 100vw;
   height: max(3svh);
   gap: min(0.2em);
+  position: absolute;
+  top: 0;
 }
 
 .navbar-row-1{
@@ -167,7 +169,9 @@ button:focus-visible {
 .all-collections-list,
 .nft-cards-list,
 .nfts-list,
-.listed-nfts-list{
+.listed-nfts-list,
+.checkout-items-list,
+.cart-totals-list{
   display: flex;
   width: 100vw;
   flex-wrap: wrap;
@@ -606,13 +610,21 @@ button:focus-visible {
 }
 
 .all-nfts-title,
-.listed-nfts-title{
+.listed-nfts-title,
+.shopping-cart-title-row,
+.cart-total-title-row{
   display: grid;
   justify-content: center;
   align-items: center;
   text-align: center;
   font-weight: 900;
   font-size: large;
+}
+
+.cart-total-title-row,
+.shopping-cart-title-row{
+  font-size: xx-large;
+  padding: min(1.5em);
 }
 
 .nfts-list-item{
@@ -624,6 +636,9 @@ button:focus-visible {
   border-style: solid;
   border-color: white;
   padding: 0.5em;
+  border-radius: 1.5em;
+  border-width: 2px;
+  box-shadow: 0 0 0.5em rgba(255, 255, 255, 50%);
 }
 
 .listed-nft-cards-list{
@@ -641,12 +656,6 @@ button:focus-visible {
   align-items: center;
   place-items: center;
   width: min-content(98%);
-  padding: min(0.7em);
-  border-radius: 1em;
-  border-width: 0.1em;
-  border-style: solid;
-  border-color: white;
-  box-shadow: 0 0 1.5em rgba(255, 255, 255, 50%);
   gap: min(1em);
   grid-template-rows: auto auto;
 }
@@ -663,6 +672,7 @@ button:focus-visible {
   border-color: white;
   box-shadow: 0 0 1.5em rgba(255, 255, 255, 50%);
   margin: min(1em);
+  border-radius: 1.5em;
 }
 
 .back-link{
@@ -842,7 +852,8 @@ button:focus-visible {
 }
 
 .add-to-cart-button,
-.make-offer-button{
+.make-offer-button,
+.pay-now-button{
   background-color: rgb(0, 170, 255);
   padding: min(1em);
   padding-left: 10em;
@@ -924,7 +935,8 @@ button:focus-visible {
   transform: translate(-50%, -50%);
 }
 
-.checkout-modal-title{
+.checkout-modal-title,
+.item-name{
   display: grid;
   font-size: x-large;
   font-weight: 900;
@@ -933,13 +945,15 @@ button:focus-visible {
   text-align: center;
 }
 
-.checkout-modal-image-container{
+.checkout-modal-image-container,
+.item-image-container{
   display: grid;
   justify-content: center;
   align-items: center;
 }
 
-.checkout-modal-image{
+.checkout-modal-image,
+.item-image{
   display: grid;
   object-fit: contain;
   height: 10em;
@@ -953,4 +967,91 @@ button:focus-visible {
   grid-template-columns: repeat(2, auto);
   justify-content: center;
   align-items: center;
+}
+
+.docs-page{
+  display: grid;
+  grid-template-rows: repeat(2, auto);
+}
+
+.docs{
+  display: grid;
+  grid-template-rows: repeat(3, auto);
+  position: relative;
+  top: -20svh;
+  gap: min(3em);
+}
+
+.author-avatar{
+  display: grid;
+  object-fit: contain;
+  height: 3em;
+  padding: min(1em);
+  border-radius: 2em;
+}
+
+.docs-title{
+  display: grid;
+  position: absolute;
+  top: 8svh;
+}
+
+.author-avatar-container{
+  display: grid;
+  align-items: center;
+  justify-content: right;
+  width: 100vw;
+}
+
+.docs-footer{
+  display: inline;
+  position: absolute;
+  top: 72svh;
+}
+
+.docs-content{
+  display: inline;
+  padding-top: min(2em);
+}
+
+.checkout-list-item{
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-rows: repeat(3, auto);
+  max-width: 98vw;
+  border-radius: 1.5em;
+  border-width: 2px;
+  border-style: solid;
+  border-color: white;
+  padding: 0.5em;
+  box-shadow: 0 0 1.5em rgba(255, 255, 255, 50%);
+  gap: min(1em);
+  animation: zoom 0.5s ease-in-out;
+}
+
+.item-price{
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  font-weight: 900;
+}
+
+.item-buttons-row{
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkout-body{
+  display: grid;
+  position: absolute;
+  top: 8svh;
+}
+
+.currency-total{
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  font-size: x-large;
 }

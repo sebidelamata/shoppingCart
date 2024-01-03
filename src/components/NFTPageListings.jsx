@@ -10,7 +10,7 @@ const NFTPageListings = ({openSeaSingleNFTData, collection}) => {
     const [countdownZero, setCountdownZero] = useState(false)
     const [showCheckoutModal, setShowCheckoutModal] = useState(false)
 
-    const { shoppingCart, addToCart } = useShoppingCart()
+    const { shoppingCart, addToCart, removeFromCart } = useShoppingCart()
 
     const [isInCart, setIsInCart] = useState(false)
     const checkIsInCart = () => {

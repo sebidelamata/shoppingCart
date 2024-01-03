@@ -48,6 +48,13 @@ const SingleListedNFTCard = ({listing, collection}) => {
         loading
     } = OpenSeaSingleNFT(listing)
 
+    const handlePageScroll = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+          })
+    }
+
     console.log(openSeaSingleNFTData)
 
     if(error) return <p>A network error was encountered</p>
@@ -60,6 +67,7 @@ const SingleListedNFTCard = ({listing, collection}) => {
             to={`/shop/collections/${openSeaSingleNFTData.nft.contract}/${openSeaSingleNFTData.nft.identifier}`}
             className="single-nft-card"
             state={[openSeaSingleNFTData, collection]}
+            onClick={() => handlePageScroll()}
         >
             <div className="single-listed-nft-card">
                 <strong>{openSeaSingleNFTData.nft.name}</strong>

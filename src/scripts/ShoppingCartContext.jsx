@@ -24,8 +24,15 @@ const ShoppingCartProvider = ({ children }) => {
       }
     }
 
+    const removeFromCart = (item) => {
+      const inputToken = item[0].protocol_data.parameters.offer[0].token
+      const inputIdentifier = item[0].protocol_data.parameters.offer[0].identifierOrCriteria
+      const newShoppingCart = shoppingCart.filter(obj => !(obj[0].protocol_data.parameters.offer[0].token.toUpperCase() === inputToken.toUpperCase() && obj[0].protocol_data.parameters.offer[0].identifierOrCriteria === inputIdentifier))
+      setShoppingCart(newShoppingCart);
+    }
+
     return(
-        <ShoppingCartContext.Provider value={{ shoppingCart, addToCart }}>
+        <ShoppingCartContext.Provider value={{ shoppingCart, addToCart, removeFromCart }}>
           {children}
         </ShoppingCartContext.Provider>
       )
