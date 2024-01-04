@@ -123,7 +123,7 @@ const ListedNFTsList = ({collection}) => {
                                 })
                             }
                         </div>
-                        <PaginationRow allCollectionsURL={collection} currentpage={currentpage} setCurrentPage={setCurrentPage}/>
+                        <PaginationRow allCollectionsURL={listedOpenSeaCollectionNFTs} currentpage={currentpage} setCurrentPage={setCurrentPage}/>
                     </>
                 )
             }

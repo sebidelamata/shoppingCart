@@ -1,5 +1,5 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Raleway', sans-serif;
   line-height: 1.5;
   font-weight: 400;
   max-width: 100vw;
@@ -80,6 +80,7 @@ button:focus-visible {
 
 .icon-large{
   width: 15em;
+  animation: bob 5s linear infinite;
 }
 
 .icon-small{
@@ -93,7 +94,7 @@ button:focus-visible {
   justify-content: center;
   width: 100vw;
   height: max(3svh);
-  gap: min(0.2em);
+  gap: min(0.4em);
   position: absolute;
   top: 0;
 }
@@ -440,7 +441,7 @@ button:focus-visible {
   width: 100vw;
   height: max(25svh);
   object-fit: cover;
-  top: 8svh;
+  top: 10svh;
   z-index: 0;
 }
 
@@ -520,7 +521,7 @@ button:focus-visible {
 
 .single-collection-body{
   position: absolute;
-  top: 34svh;
+  top: 38svh;
   display: grid;
   gap: min(3em);
 }
@@ -555,7 +556,7 @@ button:focus-visible {
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: -2%;
+  top: -3%;
   left: 40%;
   text-align: center;
   backdrop-filter: blur(12em);
@@ -844,7 +845,8 @@ button:focus-visible {
 }
 
 .add-to-cart-button-container,
-.make-offer-button-container{
+.make-offer-button-container,
+.pay-now-button-row{
   display: grid;
   justify-content: center;
   align-items: center;
@@ -858,6 +860,12 @@ button:focus-visible {
   padding: min(1em);
   padding-left: 10em;
   padding-right: 10em;
+}
+.pay-now-button{
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .add-to-cart-button.inactive{
@@ -978,7 +986,7 @@ button:focus-visible {
   display: grid;
   grid-template-rows: repeat(3, auto);
   position: relative;
-  top: -20svh;
+  top: -14svh;
   gap: min(3em);
 }
 
@@ -1006,7 +1014,7 @@ button:focus-visible {
 .docs-footer{
   display: inline;
   position: absolute;
-  top: 72svh;
+  top: 66svh;
 }
 
 .docs-content{
@@ -1054,4 +1062,130 @@ button:focus-visible {
   justify-content: center;
   align-items: center;
   font-size: x-large;
+}
+
+/* waves */
+.ocean {
+  height: 20svh;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow-x: hidden;
+}
+
+.wave {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 88.7'%3E%3Cpath d='M800 56.9c-155.5 0-204.9-50-405.5-49.9-200 0-250 49.9-394.5 49.9v31.8h800v-.2-31.6z' fill='%23003F7C'/%3E%3C/svg%3E");
+  position: absolute;
+  width: 200%;
+  height: 100%;
+  animation: wave 10s -3s linear infinite;
+  transform: translate3d(0, 0, 0);
+  opacity: 0.8;
+}
+
+.wave:nth-of-type(2) {
+  bottom: 0;
+  animation: wave 36s linear reverse infinite;
+  opacity: 0.5;
+}
+
+.wave:nth-of-type(3) {
+  bottom: 0;
+  animation: wave 40s -1s linear infinite;
+  opacity: 0.5;
+}
+
+@keyframes wave {
+    0% {transform: translateX(0);}
+    50% {transform: translateX(-25%);}
+    100% {transform: translateX(-50%);}
+}
+
+.home-content{
+  position: absolute;
+  bottom: 0;
+}
+
+.home-content-card,
+.home-content-title{
+  padding-bottom: min(0.2em);
+  padding-left: min(20em);
+  font-size: x-large;
+  background-color: transparent;
+}
+
+.logo-large-container{
+  position: relative;
+  padding-left: min(20%);
+  top: 3svh;
+}
+
+@media only screen and (max-width: 767px) {
+  .ocean {
+    height: 10vh;
+  }
+
+  .wave {
+    bottom: 0;
+    animation: wave 20s -3s linear infinite;
+  }
+
+  .home-page {
+    padding-bottom: 2em;
+    width: 100vw;
+  }
+
+  .home-content {
+    padding-top: 2em;
+    width: 100vw;
+  }
+
+  .home-content-title {
+    padding-top: 2em;
+    top: 20%;
+    right: 66vw;
+  }
+
+  .home-content-card {
+    padding-left: 1em;
+  }
+
+  .logo-large-container {
+    padding-left: 10%;
+    top: 9svh;
+  }
+}
+
+.homepage-shop-link{
+  display: grid;
+  position: absolute;
+  top: 40svh;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@keyframes bob {
+  0% {
+    transform: translateY(0) rotateZ(-2.5deg); 
+  }
+  20% {
+    transform: translateY(-7.5%) rotateZ(0deg);
+  }
+  40% {
+    transform: translateY(-15%) rotateZ(2.5deg);
+  }
+  60% {
+    transform: translateY(-15%) rotateZ(0deg); 
+  }
+  80% {
+    transform: translateY(-7.5%) rotateZ(-1.25deg);
+  }
+  100% {
+    transform: translateY(0%) rotateZ(-2.5deg);
+  }
 }

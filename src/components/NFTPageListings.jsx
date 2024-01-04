@@ -125,7 +125,7 @@ const NFTPageListings = ({openSeaSingleNFTData, collection}) => {
 
     if(listingInfoError) return <p>A network error was encountered</p>
     if(listingInfoLoading) return <Loading/>
-    
+    console.log(listingInfo)
     return(
         <>
             {
