@@ -79,6 +79,8 @@ button:focus-visible {
 }
 
 .icon-large{
+  position: relative;
+  bottom: 6svh;
   width: 15em;
   animation: bob 5s linear infinite;
 }
@@ -1119,7 +1121,7 @@ button:focus-visible {
 .logo-large-container{
   position: relative;
   padding-left: min(20%);
-  top: 3svh;
+  top: 8svh;
 }
 
 @media only screen and (max-width: 767px) {
@@ -1155,6 +1157,10 @@ button:focus-visible {
   .logo-large-container {
     padding-left: 10%;
     top: 9svh;
+  }
+  .icon-large{
+    position: relative;
+    top: 2svh;
   }
 }
 
