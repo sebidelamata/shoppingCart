@@ -15,7 +15,7 @@ const Docs = () => {
                 </div>
                 <div className="docs-footer">
                     <div className="author-avatar-container">
-                        <img className="author-avatar" src="../../public/GBC-3901.png" alt="GMX Blueberry Club #3901" />
+                        <img className="author-avatar" src="/GBC-3901.png" alt="GMX Blueberry Club #3901" />
                     </div>
                     <div className="docs-attribution">
                         Created by Sebi de la Mata (djniceboisweater.eth)
