@@ -1,6 +1,7 @@
 import Navbar from "../components/Navbar.jsx"
 import Loading from "../components/Loading.jsx"
 import WalletConnectButton from "../components/WalletConnectButton.jsx"
+import gbc from '/GBC-3901.png'
 
 const Docs = () => {
     return (
@@ -15,7 +16,7 @@ const Docs = () => {
                 </div>
                 <div className="docs-footer">
                     <div className="author-avatar-container">
-                        <img className="author-avatar" src="/GBC-3901.png" alt="GMX Blueberry Club #3901" />
+                        <img className="author-avatar" src={gbc} alt="GMX Blueberry Club #3901" />
                     </div>
                     <div className="docs-attribution">
                         Created by Sebi de la Mata (djniceboisweater.eth)
