@@ -3,8 +3,6 @@ import { useState } from "react";
 const PaginationRow = ({allCollectionsURL, currentpage, setCurrentPage}) => {
 
     const numPages = Math.ceil(allCollectionsURL.length / 10)
-    console.log(numPages)
-    console.log(allCollectionsURL)
 
     const handlePaginationPageClick = (e) => {
         let value = e.target.textContent - 1
