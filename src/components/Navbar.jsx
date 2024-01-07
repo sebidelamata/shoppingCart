@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import PaperBoat from '../../public/PaperBoat.svg'
+import PaperBoat from '/Paperboat.svg'
 import WalletConnectButton from './WalletConnectButton'
 
 const Navbar = () => {
