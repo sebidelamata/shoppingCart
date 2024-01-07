@@ -9,6 +9,8 @@ const NFTPage = () => {
     const location = useLocation()
     const [openSeaSingleNFTData, collection] = location.state || {}
     const [showTraits, setShowTraits] = useState(false)
+    console.log(openSeaSingleNFTData)
+    console.log(collection)
 
     const handleTraitsClick = () => {
         setShowTraits(!showTraits)
@@ -74,20 +76,6 @@ const NFTPage = () => {
                                                 trait.value &&
                                                 <div className="trait-value">
                                                     {trait.value}
-                                                </div>
-                                            }
-                                            {
-                                                trait.trait_count === 0 &&
-                                                <div className="trait-count">
-                                                    Unique
-                                                </div>
-                                            }
-                                            {
-                                                trait.trait_count !== 0 &&
-                                                <div className="trait-count">
-                                                    {
-                                                    `${((trait.trait_count / collection.collection.totalSupply) * 100).toFixed(2)}%`
-                                                    }
                                                 </div>
                                             }
                                         </li>

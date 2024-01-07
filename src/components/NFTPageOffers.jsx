@@ -132,7 +132,7 @@ const NFTPageOffers = ({openSeaSingleNFTData}) => {
                             <button>Offerer</button>
                         </Link>
                         <div className="make-offer-button-container">
-                            <button className="make-offer-button" onClick={() => console.log('make offer')}>
+                            <button className="make-offer-button" onClick={() => window.open('https://www.youtube.com/watch?v=FIF7wKJb2iU&ab_channel=RHINO', '_blank')}>
                                 Make Offer
                             </button>
                         </div>

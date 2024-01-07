@@ -3,31 +3,40 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import CustomRouter from './routes/Router.jsx'
 import { ShoppingCartProvider } from './scripts/ShoppingCartContext.jsx'
-import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/react'
-import { WagmiConfig } from 'wagmi'
-import { arbitrum, mainnet } from 'viem/chains'
+import { createWeb3Modal, defaultConfig } from '@web3modal/ethers/react'
 
-// Wallet Connect Stuff
+// 1. Get projectId at https://cloud.walletconnect.com
 const projectId = import.meta.env.VITE_WALLET_CONNECT_PROJECT_ID
-const metadata = {
-  name: 'Web3Modal',
-  description: 'Web3Modal Example',
-  url: 'https://web3modal.com',
-  icons: ['https://avatars.githubusercontent.com/u/37784886']
+
+// 2. Set chains
+const mainnet = {
+  chainId: 1,
+  name: 'Ethereum',
+  currency: 'ETH',
+  explorerUrl: 'https://etherscan.io',
+  rpcUrl: 'https://cloudflare-eth.com'
 }
 
-const chains = [mainnet, arbitrum]
-const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata })
-createWeb3Modal({ wagmiConfig, projectId, chains })
+// 3. Create modal
+const metadata = {
+  name: 'GapingPond',
+  description: 'A Whiltelable NFT Marketplace',
+  url: 'https://mywebsite.com',
+  icons: ['https://avatars.mywebsite.com/']
+}
+
+createWeb3Modal({
+  ethersConfig: defaultConfig({ metadata }),
+  chains: [mainnet],
+  projectId
+})
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <WagmiConfig config={wagmiConfig}>
-      <ShoppingCartProvider>
-        <CustomRouter />
-      </ShoppingCartProvider>
-    </WagmiConfig>
+    <ShoppingCartProvider>
+      <CustomRouter />
+    </ShoppingCartProvider>
   </React.StrictMode>,
 )
 

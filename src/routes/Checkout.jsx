@@ -2,10 +2,19 @@ import { useState } from 'react'
 import Navbar from '../components/Navbar'
 import { useShoppingCart } from '../scripts/ShoppingCartContext.jsx'
 import CheckoutListItem from '../components/CheckoutListItem.jsx'
+import { Navigate, useNavigate } from 'react-router-dom';
 
 function Checkout() {
 
-  const { shoppingCart, addToCart, removeFromCart } = useShoppingCart()
+  const { shoppingCart, setShoppingCart, addToCart, removeFromCart } = useShoppingCart()
+
+  const navigate = useNavigate()
+
+  const purchaseSingleOrder = () => {
+    setShoppingCart([])
+    window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley', '_blank');
+    navigate('/')
+  }
 
   // may have multiple totals in multiple currencies
   const calculateCartTotals = (cart) => {
@@ -67,7 +76,7 @@ function Checkout() {
             }
           </ul>
           <div className='pay-now-button-row'>
-            <button className='pay-now-button'>
+            <button className='pay-now-button' onClick={() => purchaseSingleOrder()}>
               Pay Now
             </button>
           </div>
